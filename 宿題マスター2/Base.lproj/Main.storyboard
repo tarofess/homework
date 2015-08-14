@@ -1,25 +1,365 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uMz-n8-5Kg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="キミの名前は？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLG-lI-dfD">
+                                <rect key="frame" x="100" y="149" width="119" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OK!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peY-d2-Tyh">
+                                <rect key="frame" x="145" y="321" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B55-DV-0ds">
+                                <rect key="frame" x="52" y="225" width="215" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="yzr-js-XIp"/>
+                                </connections>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="SDI-dk-qIs">
+                        <barButtonItem key="rightBarButtonItem" title="アカウントの管理" id="tAz-u6-1tc">
+                            <connections>
+                                <segue destination="IZp-n8-WnN" kind="show" id="U5X-G0-rQn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="successAuthLabel" destination="peY-d2-Tyh" id="vK9-uy-Add"/>
+                        <outlet property="userNameTextField" destination="B55-DV-0ds" id="k1u-es-EE8"/>
+                        <segue destination="NDS-Ck-7Hb" kind="presentation" identifier="RunTitleViewController" id="N43-06-81U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="304" y="234"/>
+        </scene>
+        <!--アカウントの管理-->
+        <scene sceneID="SbS-bA-8ZV">
+            <objects>
+                <viewController storyboardIdentifier="AccountManagementViewController" id="IZp-n8-WnN" customClass="AccountManagementViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9xs-eA-vHx"/>
+                        <viewControllerLayoutGuide type="bottom" id="NAM-CD-sHS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9WG-HB-BUJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="b0E-iT-gxq">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="IZp-n8-WnN" id="Emx-Sq-oLb"/>
+                                    <outlet property="delegate" destination="IZp-n8-WnN" id="fzC-6k-hm3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="アカウントの管理" id="2oq-YU-rei">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w2f-Tf-ZBp">
+                            <connections>
+                                <action selector="addNewUser:" destination="IZp-n8-WnN" id="1xA-cf-mF9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="b0E-iT-gxq" id="X6U-5N-QmL"/>
+                        <segue destination="s3X-Z3-pHm" kind="show" identifier="RunPowerUpViewController" id="cbN-43-joh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vmC-9C-uPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304" y="924"/>
+        </scene>
+        <!--Title View Controller-->
+        <scene sceneID="093-Cq-g62">
+            <objects>
+                <viewController storyboardIdentifier="TitleViewController" id="NDS-Ck-7Hb" customClass="TitleViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mp9-9n-lKJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZbQ-E9-KAA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kwr-eP-cln">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLP-MD-8R2">
+                                <rect key="frame" x="48" y="52" width="225" height="168"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="宿題マスター" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqI-jg-73Y">
+                                <rect key="frame" x="86" y="228" width="149" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fire001.png" translatesAutoresizingMaskIntoConstraints="NO" id="q1S-rv-fVj">
+                                <rect key="frame" x="95" y="272" width="130" height="130"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAn-mg-72I">
+                                <rect key="frame" x="115" y="410" width="90" height="30"/>
+                                <state key="normal" title="宿題と戦う！">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3aR-pd-IKm" kind="presentation" identifier="" modalTransitionStyle="flipHorizontal" id="Fn6-i4-tuL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYU-vv-2E3">
+                                <rect key="frame" x="16" y="20" width="30" height="30"/>
+                                <state key="normal" title="戻る">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedBackButton:" destination="NDS-Ck-7Hb" eventType="touchUpInside" id="icx-Xt-GWU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="currentUsersImage" destination="KLP-MD-8R2" id="RPW-1I-YIW"/>
+                        <outlet property="fireImageView" destination="q1S-rv-fVj" id="ukB-sn-Xh0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WoH-eB-BBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="820" y="234"/>
+        </scene>
+        <!--Timer View Controller-->
+        <scene sceneID="o6W-Jq-6Wb">
+            <objects>
+                <viewController storyboardIdentifier="TimerViewController" id="3aR-pd-IKm" customClass="TimerViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LMR-NK-yVa"/>
+                        <viewControllerLayoutGuide type="bottom" id="Stw-So-D1w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="abM-AF-qxO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLV-Zn-hLl">
+                                <rect key="frame" x="58" y="224" width="205" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbT-NC-SNh">
+                                <rect key="frame" x="123" y="350" width="75" height="30"/>
+                                <state key="normal" title="スタート！">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="operateTimer:" destination="3aR-pd-IKm" eventType="touchUpInside" id="8Qd-6T-7HY"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1S-5Z-LtN">
+                                <rect key="frame" x="91" y="92" width="154" height="49"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="できた！！">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedCompletionLabel:" destination="3aR-pd-IKm" eventType="touchUpInside" id="bkz-0l-iYt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="（600ポイント）" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgf-oc-SK0">
+                                <rect key="frame" x="95" y="258" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="completionLabel" destination="w1S-5Z-LtN" id="J0V-6g-o9V"/>
+                        <outlet property="operateTimerButton" destination="dbT-NC-SNh" id="jUa-t8-y3W"/>
+                        <outlet property="pointLabel" destination="zgf-oc-SK0" id="V2z-Dj-xsM"/>
+                        <outlet property="timerLabel" destination="gLV-Zn-hLl" id="9VX-d3-s5m"/>
+                        <segue destination="s3X-Z3-pHm" kind="presentation" identifier="RunPowerUpViewController" modalTransitionStyle="crossDissolve" id="Bum-Om-TtU"/>
+                        <segue destination="mJh-bC-KVS" kind="presentation" identifier="RunGameOverViewController" modalTransitionStyle="crossDissolve" id="w8R-Pz-Age"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJQ-MH-e4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1314" y="234"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BVC-Tv-WXR">
+            <objects>
+                <viewController id="mJh-bC-KVS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2zb-rc-znu"/>
+                        <viewControllerLayoutGuide type="bottom" id="jSa-k5-wmY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rL2-nE-Mw6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gameover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X0l-2d-5rW">
+                                <rect key="frame" x="101" y="167" width="118" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="145" id="6MD-Gj-Eb6"/>
+                                    <constraint firstAttribute="width" constant="118" id="Nsn-Kl-EGM"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ザンネン！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xuo-BF-Z8O">
+                                <rect key="frame" x="118" y="361" width="85" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="でも次はきっとできるよ！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6da-Wl-3tY">
+                                <rect key="frame" x="116" y="390" width="204" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oky-CP-oW7">
+                                <rect key="frame" x="16" y="28" width="120" height="30"/>
+                                <state key="normal" title="最初の画面に戻る">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="uMz-n8-5Kg" kind="presentation" id="qIP-M2-LBw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="X0l-2d-5rW" secondAttribute="centerY" id="4my-5L-diV"/>
+                            <constraint firstAttribute="centerX" secondItem="Xuo-BF-Z8O" secondAttribute="centerX" id="E2l-2t-hPM"/>
+                            <constraint firstItem="Xuo-BF-Z8O" firstAttribute="leading" secondItem="6da-Wl-3tY" secondAttribute="leading" constant="2" id="Syp-m8-UjE"/>
+                            <constraint firstItem="oky-CP-oW7" firstAttribute="top" secondItem="2zb-rc-znu" secondAttribute="bottom" constant="8" id="Tco-w3-YHD"/>
+                            <constraint firstItem="Xuo-BF-Z8O" firstAttribute="top" secondItem="X0l-2d-5rW" secondAttribute="bottom" constant="49" id="Tdt-H4-pYl"/>
+                            <constraint firstAttribute="centerX" secondItem="X0l-2d-5rW" secondAttribute="centerX" id="VIf-kS-ZHL"/>
+                            <constraint firstItem="oky-CP-oW7" firstAttribute="leading" secondItem="rL2-nE-Mw6" secondAttribute="leadingMargin" id="rKZ-vM-ieE"/>
+                            <constraint firstItem="6da-Wl-3tY" firstAttribute="top" secondItem="Xuo-BF-Z8O" secondAttribute="bottom" constant="8" id="sze-ju-nKh"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SQx-UD-DCs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1314" y="924"/>
+        </scene>
+        <!--Power Up View Controller-->
+        <scene sceneID="v0q-8a-tmR">
+            <objects>
+                <viewController storyboardIdentifier="PowerUpViewController" id="s3X-Z3-pHm" customClass="PowerUpViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9pD-ej-8vF"/>
+                        <viewControllerLayoutGuide type="bottom" id="exh-Re-uOS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HG6-q9-A0B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sN9-wK-A4T">
+                                <rect key="frame" x="16" y="104" width="288" height="287"/>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="今のパワー" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCW-zm-Acv">
+                                <rect key="frame" x="118" y="399" width="85" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="レベルアップまであと" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qj4-M0-I0w">
+                                <rect key="frame" x="75" y="439" width="170" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq6-LH-nWv">
+                                <rect key="frame" x="16" y="28" width="30" height="30"/>
+                                <state key="normal" title="戻る">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedBackButton:" destination="s3X-Z3-pHm" eventType="touchUpInside" id="Vc4-Sm-eUq"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名前" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Niy-7h-wWS">
+                                <rect key="frame" x="62" y="75" width="196" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="backButton" destination="eq6-LH-nWv" id="PqS-O7-4EC"/>
+                        <outlet property="characterName" destination="Niy-7h-wWS" id="sqF-8d-8CT"/>
+                        <outlet property="currentPowerLabel" destination="mCW-zm-Acv" id="qX9-ea-LcC"/>
+                        <outlet property="nextLevelUpLabel" destination="qj4-M0-I0w" id="2I7-p2-4FP"/>
+                        <outlet property="usersImage" destination="sN9-wK-A4T" id="grs-Az-44K"/>
+                        <segue destination="uMz-n8-5Kg" kind="presentation" identifier="RunViewController" id="JOC-7W-gsC"/>
+                        <segue destination="S0B-3N-EVv" kind="unwind" identifier="UnwindTitleViewController" unwindAction="unwindAction:" id="QPa-EM-Nrh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sgl-7I-Je2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="S0B-3N-EVv" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1810" y="234"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Lee-d7-o6E">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uMz-n8-5Kg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CEY-KL-vhd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="CcL-UA-pNg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qbC-Qc-Qkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-192.5" y="234.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fire001.png" width="305" height="657"/>
+        <image name="gameover.jpg" width="500" height="700"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JOC-7W-gsC"/>
+        <segue reference="Bum-Om-TtU"/>
+    </inferredMetricsTieBreakers>
 </document>
