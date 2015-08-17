@@ -21,7 +21,7 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,7 +66,7 @@ class TimerViewController: UIViewController {
             performSegueWithIdentifier("RunGameOverViewController", sender: nil)
         }
         self.timerLabel.text = model.getTimeForTimerLabel()
-        self.pointLabel.text = "（" + model.point.description + "ポイント）"
+        self.pointLabel.text = "（" + model.getPoint().description + "ポイント）"
     }
     
     // MARK: - segue
@@ -74,7 +74,10 @@ class TimerViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "RunPowerUpViewController" {
             let puVC = segue.destinationViewController as! PowerUpViewController
+            puVC.userScore = model.getPoint()
         }
     }
+    
+    @IBAction func unwindToTimerViewController(segue: UIStoryboardSegue) {}
 }
 

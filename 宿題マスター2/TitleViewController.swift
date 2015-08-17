@@ -39,6 +39,10 @@ class TitleViewController: UIViewController {
         fireImageView.animationDuration = 1.2
         fireImageView.animationRepeatCount = 0
         fireImageView.startAnimating()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         
         self.showUsersImage()
     }
@@ -53,22 +57,7 @@ class TitleViewController: UIViewController {
     
     func showUsersImage() {
         let imageManagement = ImageManagement()
-        self.currentUsersImage.image = imageManagement.showUsersImage()
-        
-//        var usersScore = 0
-//        var userName = NSUserDefaults.standardUserDefaults().objectForKey("userName") as! String
-//        
-//        let dbModel = DBModel()
-//        usersScore = dbModel.getSpecificUsersScore(userName)
-//        
-//        println("userName: \(userName)  userScore: \(usersScore)")
-//        
-//        let imageManagement = ImageManagement()
-//        self.currentUsersImage.image = imageManagement.showUsersImage(usersScore)
+        self.currentUsersImage.image = imageManagement.showUsersImageAndName().characterImage
     }
-    
-    // MARK: - segue
-    
-    @IBAction func unwindAction(segue: UIStoryboardSegue) {}
 }
 

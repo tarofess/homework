@@ -21,6 +21,7 @@ class DBModel {
         let user = User()
         user.id = autoIncrementID
         user.userName = aUserName
+        user.characterName = "あかちゃん"
         
         realm.transactionWithBlock({ () -> Void in
             self.realm.addObject(user)
@@ -32,9 +33,10 @@ class DBModel {
     
     // MARK: - read
     
-    func getUser() -> (userName: [String], score: [Int]) {
+    func getUser() -> (userName: [String], score: [Int], characterName: [String]) {
         var userNameArray: [String] = []
         var scoreArray: [Int] = []
+        var characterNameArray: [String] = []
         
         let users = User.allObjects()
         
@@ -42,41 +44,35 @@ class DBModel {
             var user = item as! User
             userNameArray.append(user.userName)
             scoreArray.append(user.score)
+            characterNameArray.append(user.characterName)
         }
         
-        return (userNameArray, scoreArray)
+        return (userNameArray, scoreArray, characterNameArray)
     }
     
-    func getSpecificUsersScore(aUserName: String) -> Int {
+    func getSpecificUsersData(aUserName: String) -> (userScore: Int, userCharacter: String) {
         var userScore = 0
+        var userCharacter = ""
         var user = User.objectsWhere("userName == %@", aUserName)
         
         for item in user {
             var specificUser = item as! User
             userScore = specificUser.score
+            userCharacter = specificUser.characterName
         }
         
-        return userScore
+        return (userScore, userCharacter)
     }
-    
-//    func getAllUserName() -> [String] {
-//        var userArray: [String] = []
-//        let users = User.allObjects()
-//        
-//        for item in users {
-//            var user = item as! User
-//            userArray.append(user.userName)
-//        }
-//        
-//        return userArray
-//    }
     
     // MARK: - update
     
-    func updateScore(aUserName: String, aNewScore: Int) {
+    func updateScore(aUserName: String, aNewScore: Int, aCharacterName: String) {
         let user = User()
+        var userOldScore = self.getSpecificUsersData(aUserName).userScore
         user.userName = aUserName
-        user.score = aNewScore
+        user.score = userOldScore + aNewScore
+        user.characterName = aCharacterName
+        println("\(aUserName):\(aNewScore):\(aCharacterName)")
         
         realm.transactionWithBlock({ () -> Void in
             self.realm.addOrUpdateObject(user)

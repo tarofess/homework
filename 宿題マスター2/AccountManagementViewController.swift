@@ -38,6 +38,9 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     }
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
+        let cell = table.cellForRowAtIndexPath(indexPath)
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        userDefault.setObject(cell!.textLabel!.text, forKey: "userName")
         performSegueWithIdentifier("RunPowerUpViewController",sender: indexPath)
     }
     
@@ -46,6 +49,8 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
             let alertController = UIAlertController(title: "アカウントの削除！", message: "このアカウントを削除しちゃう？", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) -> Void in
                 self.model.userName.removeAtIndex(indexPath.row)
+                self.model.userScore.removeAtIndex(indexPath.row)
+                self.model.userCharacter.removeAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                 let dbModel = DBModel()
                 dbModel.deleteUser(self.model.userName[indexPath.row])
@@ -83,6 +88,8 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
                 if !dbModel.hasSameUserNameInDatabase(textField.text) {
                     dbModel.insertUser(textField.text)
                     self.model.userName.append(textField.text)
+                    self.model.userScore.append(0)
+                    self.model.userCharacter.append("あかちゃん")
                     let indexPath = NSIndexPath(forRow: count(self.model.userName) - 1, inSection: 0)
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                 } else {
@@ -137,6 +144,8 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         let powerUpVC = segue.destinationViewController as! PowerUpViewController
         let indexPath = sender as! NSIndexPath
         powerUpVC.userScore = self.model.userScore[indexPath.row]
+        powerUpVC.characterNameStore = self.model.userCharacter[indexPath.row]
+        powerUpVC.isWantToShowLabels = true
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class PowerUpViewController: UIViewController {
     @IBOutlet weak var usersImage: UIImageView!
@@ -15,16 +16,20 @@ class PowerUpViewController: UIViewController {
     @IBOutlet weak var currentPowerLabel: UILabel!
     @IBOutlet weak var nextLevelUpLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var clearLabel: UILabel!
     
     let model = PowerUpModel()
     var userScore = 0
+    var characterNameStore = ""
+    var isWantToShowLabels = false
     var tapGestureRecognizer: UITapGestureRecognizer!
+    var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setTapGestureRecognizer()
         self.showUsersImage()
+        self.showUpUIAppearance()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,34 +53,76 @@ class PowerUpViewController: UIViewController {
                 let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                     self.view.backgroundColor = UIColor.whiteColor()
-                    self.saveData()
+                    self.isWantToShowLabels = true
                     self.showUpUIAppearance()
-                    self.showAfterPowerUpImage()
+                    self.showAfterPowerUpImageAndName()
+                    self.setPowerValueToLavel()
+                    self.saveData()
                 }
         })
     }
     
     func showUsersImage() {
         let imageManagement = ImageManagement()
-        self.usersImage.image = imageManagement.showUsersImage()
-    }
-    
-    func showAfterPowerUpImage() {
-        let imageManagement = ImageManagement()
-        self.usersImage.image = imageManagement.showUsersImage()
-    }
-    
-    func showUpUIAppearance() {
-        self.characterName.hidden = false
-        self.currentPowerLabel.hidden = false
-        self.nextLevelUpLabel.hidden = false
-        self.backButton.hidden = false
+        self.usersImage.image = imageManagement.showUsersImageAndName().characterImage
     }
     
     func saveData() {
         let userDefault = NSUserDefaults.standardUserDefaults()
-        let dbModel = DBModel()
-        dbModel.updateScore(userDefault.objectForKey("userName") as! String, aNewScore: userScore)
+        model.saveData(userDefault.objectForKey("userName") as! String, aScore: userScore, aCharacterName: self.characterName.text!)
+    }
+    
+    func showUpUIAppearance() {
+        if !self.isWantToShowLabels {
+            self.setTapGestureRecognizer()
+        } else {
+            self.characterName.text = characterNameStore
+            self.currentPowerLabel.text = "今のパワー　" + String(model.getUsersCurrentPower())
+            self.nextLevelUpLabel.text = "レベルアップまであと　" + String(model.getRestOfPowerForNextLevelUp())
+        }
+        self.characterName.hidden = !self.isWantToShowLabels
+        self.currentPowerLabel.hidden = !self.isWantToShowLabels
+        self.nextLevelUpLabel.hidden = !self.isWantToShowLabels
+        self.backButton.hidden = !self.isWantToShowLabels
+    }
+    
+    func setPowerValueToLavel() {
+        if model.getRestOfPowerForNextLevelUp() == 5000 {
+            self.currentPowerLabel.hidden = true
+            self.nextLevelUpLabel.hidden = true
+            self.clearLabel.hidden = false
+            self.playSound("clear", type: "mp3")
+        } else {
+            self.currentPowerLabel.text = "今のパワー　" + String(model.getUsersCurrentPower())
+            self.nextLevelUpLabel.text = "レベルアップまであと　" + String(model.getRestOfPowerForNextLevelUp())
+            
+            let userDefault = NSUserDefaults.standardUserDefaults()
+            let dbModel = DBModel()
+            var character = dbModel.getSpecificUsersData(userDefault.objectForKey("userName") as! String).userCharacter
+            
+            if self.characterName.text! == character {
+                self.playSound("up", type: "wav")
+            } else {
+                self.playSound("levelup", type: "mp3")
+            }
+        }
+    }
+    
+    func showAfterPowerUpImageAndName() {
+        let imageManagement = ImageManagement()
+        self.usersImage.image = imageManagement.showUsersImageAndName().characterImage
+        self.characterName.text = imageManagement.showUsersImageAndName().characterName
+    }
+    
+    func playSound(path: String, type: String) {
+        var alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(path, ofType: type)!)
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+        AVAudioSession.sharedInstance().setActive(true, error: nil)
+        
+        var error: NSError?
+        audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, error: &error)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
     }
     
     @IBAction func tappedBackButton(sender: AnyObject) {
@@ -85,10 +132,12 @@ class PowerUpViewController: UIViewController {
     func showBackAlert() {
         let alertController = UIAlertController(title: "どうしよう？", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         let startScreenAction = UIAlertAction(title: "最初の画面に戻る！", style: .Default, handler:{ action in
+            self.view.removeGestureRecognizer(self.tapGestureRecognizer)
             self.performSegueWithIdentifier("RunViewController", sender: self)
         })
         let doAgainGameAction = UIAlertAction(title: "もう一回やりたい！", style: .Default, handler:{ action in
-            self.performSegueWithIdentifier("UnwindTitleViewController", sender: self)
+            self.view.removeGestureRecognizer(self.tapGestureRecognizer)
+            self.performSegueWithIdentifier("RunBackTimerViewController", sender: self)
         })
         let cancelAction = UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil)
         alertController.addAction(startScreenAction)
