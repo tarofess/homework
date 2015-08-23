@@ -54,10 +54,10 @@ class PowerUpViewController: UIViewController {
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                     self.view.backgroundColor = UIColor.whiteColor()
                     self.isWantToShowLabels = true
-                    self.showUpUIAppearance()
-                    self.showAfterPowerUpImageAndName()
-                    self.setPowerValueToLavel()
                     self.saveData()
+                    self.showUpUIAppearance()
+                    self.setPowerValueToLavel()
+                    self.showAfterPowerUpImageAndName()
                 }
         })
     }
@@ -65,11 +65,12 @@ class PowerUpViewController: UIViewController {
     func showUsersImage() {
         let imageManagement = ImageManagement()
         self.usersImage.image = imageManagement.showUsersImageAndName().characterImage
+        self.characterNameStore = imageManagement.showUsersImageAndName().characterName
     }
     
     func saveData() {
         let userDefault = NSUserDefaults.standardUserDefaults()
-        model.saveData(userDefault.objectForKey("userName") as! String, aScore: userScore, aCharacterName: self.characterName.text!)
+        model.saveData(userDefault.objectForKey("userID") as! Int, aScore: userScore, aCharacterName: self.characterName.text!)
     }
     
     func showUpUIAppearance() {
@@ -87,7 +88,7 @@ class PowerUpViewController: UIViewController {
     }
     
     func setPowerValueToLavel() {
-        if model.getRestOfPowerForNextLevelUp() == 5000 {
+        if model.getRestOfPowerForNextLevelUp() > 2700 {
             self.currentPowerLabel.hidden = true
             self.nextLevelUpLabel.hidden = true
             self.clearLabel.hidden = false
@@ -98,7 +99,7 @@ class PowerUpViewController: UIViewController {
             
             let userDefault = NSUserDefaults.standardUserDefaults()
             let dbModel = DBModel()
-            var character = dbModel.getSpecificUsersData(userDefault.objectForKey("userName") as! String).userCharacter
+            var character = dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userCharacter
             
             if self.characterName.text! == character {
                 self.playSound("up", type: "wav")

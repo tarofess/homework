@@ -27,12 +27,12 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     // MARK: - tableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.userName.count
+        return model.getUserName().count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = model.userName[indexPath.row]
+        cell.textLabel?.text = model.getUserName()[indexPath.row]
         
         return cell
     }
@@ -40,7 +40,8 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
         let cell = table.cellForRowAtIndexPath(indexPath)
         let userDefault = NSUserDefaults.standardUserDefaults()
-        userDefault.setObject(cell!.textLabel!.text, forKey: "userName")
+        
+        userDefault.setObject(model.getUserID()[indexPath.row], forKey: "userID")
         performSegueWithIdentifier("RunPowerUpViewController",sender: indexPath)
     }
     
@@ -48,12 +49,16 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         if(editingStyle == UITableViewCellEditingStyle.Delete){
             let alertController = UIAlertController(title: "アカウントの削除！", message: "このアカウントを削除しちゃう？", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) -> Void in
-                self.model.userName.removeAtIndex(indexPath.row)
-                self.model.userScore.removeAtIndex(indexPath.row)
-                self.model.userCharacter.removeAtIndex(indexPath.row)
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                
                 let dbModel = DBModel()
-                dbModel.deleteUser(self.model.userName[indexPath.row])
+                dbModel.deleteUser(self.model.getUserID()[indexPath.row])
+                
+                self.model.removeUserID(indexPath.row)
+                self.model.removeUserName(indexPath.row)
+                self.model.removeUserScore(indexPath.row)
+                self.model.removeUserCharacter(indexPath.row)
+                
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             })
             let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.Cancel, handler: nil)
             
@@ -87,10 +92,12 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
                 
                 if !dbModel.hasSameUserNameInDatabase(textField.text) {
                     dbModel.insertUser(textField.text)
-                    self.model.userName.append(textField.text)
-                    self.model.userScore.append(0)
-                    self.model.userCharacter.append("あかちゃん")
-                    let indexPath = NSIndexPath(forRow: count(self.model.userName) - 1, inSection: 0)
+                    
+                    self.model.setUserID(dbModel.getAutoIncrementID() - 1)
+                    self.model.setUserName(textField.text)
+                    self.model.setUserScore(0)
+                    self.model.setUserCharacter("あかちゃん")
+                    let indexPath = NSIndexPath(forRow: count(self.model.getUserName()) - 1, inSection: 0)
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                 } else {
                     self.showFailureAlert()
@@ -143,8 +150,9 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let powerUpVC = segue.destinationViewController as! PowerUpViewController
         let indexPath = sender as! NSIndexPath
-        powerUpVC.userScore = self.model.userScore[indexPath.row]
-        powerUpVC.characterNameStore = self.model.userCharacter[indexPath.row]
+        
+        powerUpVC.userScore = self.model.getUserScore()[indexPath.row]
+        powerUpVC.characterNameStore = self.model.getUserCharacter()[indexPath.row]
         powerUpVC.isWantToShowLabels = true
     }
 }

@@ -33,7 +33,8 @@ class DBModel {
     
     // MARK: - read
     
-    func getUser() -> (userName: [String], score: [Int], characterName: [String]) {
+    func getUser() -> (userID: [Int], userName: [String], score: [Int], characterName: [String]) {
+        var userIDArray: [Int] = []
         var userNameArray: [String] = []
         var scoreArray: [Int] = []
         var characterNameArray: [String] = []
@@ -42,37 +43,42 @@ class DBModel {
         
         for item in users {
             var user = item as! User
+            userIDArray.append(user.id)
             userNameArray.append(user.userName)
             scoreArray.append(user.score)
             characterNameArray.append(user.characterName)
         }
         
-        return (userNameArray, scoreArray, characterNameArray)
+        return (userIDArray, userNameArray, scoreArray, characterNameArray)
     }
     
-    func getSpecificUsersData(aUserName: String) -> (userScore: Int, userCharacter: String) {
+    func getSpecificUsersData(aUserID: Int) -> (userID: Int, userName: String, userScore: Int, userCharacter: String) {
+        var userID = 0
+        var userName = ""
         var userScore = 0
         var userCharacter = ""
-        var user = User.objectsWhere("userName == %@", aUserName)
+        var user = User.objectsWhere("id == %d", aUserID)
         
         for item in user {
             var specificUser = item as! User
+            userID = specificUser.id
+            userName = specificUser.userName
             userScore = specificUser.score
             userCharacter = specificUser.characterName
         }
         
-        return (userScore, userCharacter)
+        return (userID, userName, userScore, userCharacter)
     }
     
     // MARK: - update
     
-    func updateScore(aUserName: String, aNewScore: Int, aCharacterName: String) {
+    func updateScore(aUserID: Int, aNewScore: Int, aCharacterName: String) {
         let user = User()
-        var userOldScore = self.getSpecificUsersData(aUserName).userScore
-        user.userName = aUserName
+        var userOldScore = self.getSpecificUsersData(aUserID).userScore
+        user.id = aUserID
+        user.userName = self.getSpecificUsersData(aUserID).userName
         user.score = userOldScore + aNewScore
         user.characterName = aCharacterName
-        println("\(aUserName):\(aNewScore):\(aCharacterName)")
         
         realm.transactionWithBlock({ () -> Void in
             self.realm.addOrUpdateObject(user)
@@ -81,9 +87,9 @@ class DBModel {
     
     // MARK: - delete
     
-    func deleteUser(aUserName: String) {
+    func deleteUser(aUserID: Int) {
         realm.transactionWithBlock( { () -> Void in
-            self.realm.deleteObjects(User.objectsWhere("userName == %@", aUserName))
+            self.realm.deleteObjects(User.objectsWhere("id == %d", aUserID))
         })
     }
     
@@ -101,5 +107,9 @@ class DBModel {
         }
         
         return false
+    }
+    
+    func getAutoIncrementID() -> Int {
+        return self.autoIncrementID
     }
 }

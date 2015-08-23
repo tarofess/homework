@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var successAuthLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var managementAccountButton: UIBarButtonItem!
     
     let model = ViewModel()
     var txtActiveField = UITextField()
@@ -27,6 +28,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         self.successAuthLabel.hidden = true
         self.userNameTextField.text = ""
+        self.userNameTextField.enabled = true
+        self.managementAccountButton.enabled = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,9 +66,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var isSuccessAuth = model.authUser(textField.text)
         
         if isSuccessAuth {
-            successAuthLabel.hidden = false
+            self.successAuthLabel.hidden = false
+            self.managementAccountButton.enabled = false
+            self.userNameTextField.enabled = false
+            
             let userDefault =  NSUserDefaults.standardUserDefaults()
-            userDefault.setObject(textField.text, forKey: "userName")
+            userDefault.setObject(model.getUserID(textField.text), forKey: "userID")
             userDefault.synchronize()
             
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))

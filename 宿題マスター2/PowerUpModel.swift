@@ -10,16 +10,16 @@ import Foundation
 
 class PowerUpModel {
     
-    func saveData(aUserName: String, aScore: Int, aCharacterName: String) {
+    func saveData(aUserID: Int, aScore: Int, aCharacterName: String) {
         let dbModel = DBModel()
-        dbModel.updateScore(aUserName, aNewScore: aScore, aCharacterName: aCharacterName)
+        dbModel.updateScore(aUserID, aNewScore: aScore, aCharacterName: aCharacterName)
     }
     
     func getUsersCurrentPower() -> Int {
         let userDefault = NSUserDefaults.standardUserDefaults()
         let dbModel = DBModel()
         
-        return dbModel.getSpecificUsersData(userDefault.objectForKey("userName") as! String).userScore
+        return dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userScore
     }
     
     func getRestOfPowerForNextLevelUp() -> Int {

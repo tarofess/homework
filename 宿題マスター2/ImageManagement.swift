@@ -12,10 +12,10 @@ import UIKit
 class ImageManagement: NSObject {
     func showUsersImageAndName() -> (characterImage: UIImage, characterName: String) {
         var usersScore = 0
-        var userName = NSUserDefaults.standardUserDefaults().objectForKey("userName") as! String
+        var userID = NSUserDefaults.standardUserDefaults().objectForKey("userID") as! Int
         
         let dbModel = DBModel()
-        usersScore = dbModel.getSpecificUsersData(userName).userScore
+        usersScore = dbModel.getSpecificUsersData(userID).userScore
         
         if usersScore <= 200 {
             return (UIImage(named: "baby.png")!, "あかちゃん")

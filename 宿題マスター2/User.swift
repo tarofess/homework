@@ -14,7 +14,7 @@ class User: RLMObject {
     dynamic var score = 0
     dynamic var characterName = ""
     
-    override class func primaryKey() -> String? {
+    override class func primaryKey() -> String {
         return "id"
     }
 }

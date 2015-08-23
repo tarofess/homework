@@ -9,17 +9,27 @@
 import Foundation
 
 class ViewModel {
+    var userID: [Int] = []
+    var userName: [String] = []
 
-    func authUser(userName: String) -> Bool {
+    func authUser(aUserName: String) -> Bool {
         let dbModel = DBModel()
+        userID = dbModel.getUser().userID
+        userName = dbModel.getUser().userName
+        
         var user: Array<String>? = dbModel.getUser().userName
         
         for userStore in user! {
-            if userName == userStore {
+            if aUserName == userStore {
                 return true
             }
         }
         
         return false
+    }
+    
+    func getUserID(aUserName: String) -> Int {
+        var index = find(userName, aUserName)
+        return self.userID[index!]
     }
 }
