@@ -53,10 +53,10 @@ extension RLMArray: SequenceType {
 
 extension RLMResults: SequenceType {
     // Support Sequence-style enumeration
-    public func generate() -> GeneratorOf<RLMObject> {
+    public func generate() -> AnyGenerator<RLMObject> {
         var i: UInt  = 0
 
-        return GeneratorOf<RLMObject> {
+        return AnyGenerator<RLMObject> {
             if (i >= self.count) {
                 return .None
             } else {

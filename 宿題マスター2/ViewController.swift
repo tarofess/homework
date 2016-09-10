@@ -63,7 +63,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        var isSuccessAuth = model.authUser(textField.text)
+        var isSuccessAuth = model.authUser(textField.text!)
         
         if isSuccessAuth {
             self.successAuthLabel.hidden = false
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.userNameTextField.enabled = false
             
             let userDefault =  NSUserDefaults.standardUserDefaults()
-            userDefault.setObject(model.getUserID(textField.text), forKey: "userID")
+            userDefault.setObject(model.getUserID(textField.text!), forKey: "userID")
             userDefault.synchronize()
             
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))

@@ -54,10 +54,10 @@ class PowerUpViewController: UIViewController {
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                     self.view.backgroundColor = UIColor.whiteColor()
                     self.isWantToShowLabels = true
-                    self.saveData()
                     self.showUpUIAppearance()
-                    self.setPowerValueToLavel()
+                    self.saveData()
                     self.showAfterPowerUpImageAndName()
+                    self.setPowerValueToLavel()
                 }
         })
     }
@@ -77,9 +77,18 @@ class PowerUpViewController: UIViewController {
         if !self.isWantToShowLabels {
             self.setTapGestureRecognizer()
         } else {
-            self.characterName.text = characterNameStore
-            self.currentPowerLabel.text = "今のパワー　" + String(model.getUsersCurrentPower())
-            self.nextLevelUpLabel.text = "レベルアップまであと　" + String(model.getRestOfPowerForNextLevelUp())
+            if model.getRestOfPowerForNextLevelUp() > 2700 {
+                let userDefault = NSUserDefaults.standardUserDefaults()
+                let dbModel = DBModel()
+                
+                self.currentPowerLabel.text = ""
+                self.nextLevelUpLabel.text = ""
+                self.characterName.text = dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userCharacter
+            } else {
+                self.characterName.text = characterNameStore
+                self.currentPowerLabel.text = "今のパワー　" + String(model.getUsersCurrentPower())
+                self.nextLevelUpLabel.text = "レベルアップまであと　" + String(model.getRestOfPowerForNextLevelUp())
+            }
         }
         self.characterName.hidden = !self.isWantToShowLabels
         self.currentPowerLabel.hidden = !self.isWantToShowLabels
@@ -101,7 +110,7 @@ class PowerUpViewController: UIViewController {
             let dbModel = DBModel()
             var character = dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userCharacter
             
-            if self.characterName.text! == character {
+            if self.characterNameStore == character {
                 self.playSound("up", type: "wav")
             } else {
                 self.playSound("levelup", type: "mp3")
@@ -113,6 +122,10 @@ class PowerUpViewController: UIViewController {
         let imageManagement = ImageManagement()
         self.usersImage.image = imageManagement.showUsersImageAndName().characterImage
         self.characterName.text = imageManagement.showUsersImageAndName().characterName
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let dbModel = DBModel()
+        dbModel.updateScore(userDefault.objectForKey("userID") as! Int, aNewScore: 0, aCharacterName: self.characterName.text!)
     }
     
     func playSound(path: String, type: String) {
