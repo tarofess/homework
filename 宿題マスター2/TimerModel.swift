@@ -10,46 +10,30 @@ import Foundation
 
 class TimerModel {
     
-    private var secForTimer = 60
-    private var point = 600
-    
-    func getPoint() -> Int {
-        return self.point
-    }
-    
-    func setPoint(aPointValueForCalc: Int) {
-        self.point += aPointValueForCalc
-    }
-    
-    func getSecForTimer() -> Int {
-        return self.secForTimer
-    }
-    
-    func setSecForTimer(aSerForTimerValueForCalc: Int) {
-        self.secForTimer += aSerForTimerValueForCalc
-    }
+    var secForTimer = 60
+    var point = 600
     
     func initSecForTimer() {
         self.secForTimer = 60
     }
     
     func minusTimeAndPoint() -> Bool{
-        if self.getPoint() < 1 {
+        if point < 1 {
             return true
         }
-        if self.getSecForTimer() < 1 {
+        if secForTimer < 1 {
             self.initSecForTimer()
         }
-        self.setSecForTimer(-1)
-        self.setPoint(-1)
+        secForTimer -= 1
+        point -= 1
         
         return false
     }
     
     func getTimeForTimerLabel() -> String {
-        let min = self.getPoint() / 60
+        let min = point / 60
         let minString = min.description
-        let sec = self.getSecForTimer()
+        let sec = secForTimer
         let secString = sec.description
         
         if min < 10 {

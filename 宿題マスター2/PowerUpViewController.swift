@@ -19,7 +19,7 @@ class PowerUpViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var clearLabel: UILabel!
     
-    let model = PowerUpModel()
+    let powerUpModel = PowerUpModel()
     var user: User!
     var isWantToShowLabels = false
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -55,7 +55,6 @@ class PowerUpViewController: UIViewController {
                     self.view.backgroundColor = UIColor.whiteColor()
                     self.isWantToShowLabels = true
                     self.showUpUIAppearance()
-                    self.saveData()
                     self.showAfterPowerUpImageAndName()
                     self.setPowerValueToLavel()
                 }
@@ -63,31 +62,21 @@ class PowerUpViewController: UIViewController {
     }
     
     func showUsersImage() {
-        let imageManagement = ImageManagement()
-        self.usersImage.image = imageManagement.showUsersImageAndName().characterImage
-        self.characterNameStore = imageManagement.showUsersImageAndName().characterName
-    }
-    
-    func saveData() {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        model.saveData(userDefault.objectForKey("userID") as! Int, aScore: userScore, aCharacterName: self.characterName.text!)
+        self.usersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
     }
     
     func showUpUIAppearance() {
         if !self.isWantToShowLabels {
             self.setTapGestureRecognizer()
         } else {
-            if model.getRestOfPowerForNextLevelUp() > 2700 {
-                let userDefault = NSUserDefaults.standardUserDefaults()
-                let dbModel = DBModel()
-                
+            if powerUpModel.getRestOfPowerForNextLevelUp() > 2700 {
                 self.currentPowerLabel.text = ""
                 self.nextLevelUpLabel.text = ""
-                self.characterName.text = dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userCharacter
+                self.characterName.text = user.characterName
             } else {
-                self.characterName.text = characterNameStore
-                self.currentPowerLabel.text = "今のパワー　" + String(model.getUsersCurrentPower())
-                self.nextLevelUpLabel.text = "レベルアップまであと　" + String(model.getRestOfPowerForNextLevelUp())
+                self.characterName.text = user.characterName
+                self.currentPowerLabel.text = "今のパワー　" + String(user.score)
+                self.nextLevelUpLabel.text = "レベルアップまであと　" + String(powerUpModel.getRestOfPowerForNextLevelUp())
             }
         }
         self.characterName.hidden = !self.isWantToShowLabels
@@ -97,20 +86,18 @@ class PowerUpViewController: UIViewController {
     }
     
     func setPowerValueToLavel() {
-        if model.getRestOfPowerForNextLevelUp() > 2700 {
+        if powerUpModel.getRestOfPowerForNextLevelUp() > 2700 {
             self.currentPowerLabel.hidden = true
             self.nextLevelUpLabel.hidden = true
             self.clearLabel.hidden = false
             self.playSound("clear", type: "mp3")
         } else {
-            self.currentPowerLabel.text = "今のパワー　" + String(model.getUsersCurrentPower())
-            self.nextLevelUpLabel.text = "レベルアップまであと　" + String(model.getRestOfPowerForNextLevelUp())
+            self.currentPowerLabel.text = "今のパワー　" + String(user.score)
+            self.nextLevelUpLabel.text = "レベルアップまであと　" + String(powerUpModel.getRestOfPowerForNextLevelUp())
+
+            let character = user.characterName
             
-            let userDefault = NSUserDefaults.standardUserDefaults()
-            let dbModel = DBModel()
-            var character = dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userCharacter
-            
-            if self.characterNameStore == character {
+            if user.characterName == character {
                 self.playSound("up", type: "wav")
             } else {
                 self.playSound("levelup", type: "mp3")
@@ -119,22 +106,21 @@ class PowerUpViewController: UIViewController {
     }
     
     func showAfterPowerUpImageAndName() {
-        let imageManagement = ImageManagement()
-        self.usersImage.image = imageManagement.showUsersImageAndName().characterImage
-        self.characterName.text = imageManagement.showUsersImageAndName().characterName
+        self.usersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
+        self.characterName.text = UserManager.sharedManager.getCharacterImageAndName().name
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let dbModel = DBModel()
-        dbModel.updateScore(userDefault.objectForKey("userID") as! Int, aNewScore: 0, aCharacterName: self.characterName.text!)
+        UserManager.sharedManager.updateUser(user.score, name: user.characterName)
     }
     
     func playSound(path: String, type: String) {
-        var alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(path, ofType: type)!)
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: nil)
-        AVAudioSession.sharedInstance().setActive(true, error: nil)
-        
-        var error: NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: alertSound, error: &error)
+        do {
+            let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(path, ofType: type)!)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOfURL: alertSound)
+        } catch {
+            print("error")
+        }
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -162,4 +148,3 @@ class PowerUpViewController: UIViewController {
     }
     
 }
-

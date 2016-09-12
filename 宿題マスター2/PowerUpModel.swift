@@ -11,14 +11,6 @@ import RealmSwift
 
 class PowerUpModel {
     
-    func saveData(aScore: Int, aCharacterName: String) {
-        let realm = try! Realm()
-        try! realm.write({
-            UserManager.sharedManager.currentUser.score = aScore
-            UserManager.sharedManager.currentUser.characterName = aCharacterName
-        })
-    }
-    
     func getRestOfPowerForNextLevelUp() -> Int {
         let userScore = UserManager.sharedManager.currentUser.score
         

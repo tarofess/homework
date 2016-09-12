@@ -16,7 +16,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
     
-    let model = TimerModel()
+    let timerModel = TimerModel()
     var timer: NSTimer!
     var isTimerStopped = true
     
@@ -61,18 +61,18 @@ class TimerViewController: UIViewController {
     // MARK: - timerProcess
     
     func updateWithTimer() {
-        if model.minusTimeAndPoint() {
+        if timerModel.minusTimeAndPoint() {
             self.timer.invalidate()
             performSegueWithIdentifier("RunGameOverViewController", sender: nil)
         }
-        self.timerLabel.text = model.getTimeForTimerLabel()
-        self.pointLabel.text = "（" + model.getPoint().description + "ポイント）"
+        self.timerLabel.text = timerModel.getTimeForTimerLabel()
+        self.pointLabel.text = "（" + timerModel.point.description + "ポイント）"
     }
     
     // MARK: - segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        UserManager.sharedManager.currentUser.score = model.getPoint()
+        UserManager.sharedManager.currentUser.score = timerModel.point
     }
     
     @IBAction func unwindToTimerViewController(segue: UIStoryboardSegue) {}

@@ -59,8 +59,7 @@ class TitleViewController: UIViewController {
     }
     
     func showUsersImage() {
-        let imageManagement = ImageManagement()
-        self.currentUsersImage.image = imageManagement.showUsersImageAndName().characterImage
+        self.currentUsersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
     }
     
 }

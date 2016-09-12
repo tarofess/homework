@@ -12,7 +12,6 @@
 		501D7A221D86B18900FA35C4 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501D7A211D86B18900FA35C4 /* RealmSwift.framework */; };
 		501D7A231D86B18900FA35C4 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 501D7A211D86B18900FA35C4 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5037C1371B72BFA800D1CC6A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037C1361B72BFA800D1CC6A /* User.swift */; };
-		5037C1801B7C11E800D1CC6A /* ImageManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037C17F1B7C11E800D1CC6A /* ImageManagement.swift */; };
 		506C2A851B6458A700C4347A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C2A841B6458A700C4347A /* AppDelegate.swift */; };
 		506C2A871B6458A700C4347A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C2A861B6458A700C4347A /* ViewController.swift */; };
 		506C2A8A1B6458A700C4347A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506C2A881B6458A700C4347A /* Main.storyboard */; };
@@ -79,7 +78,6 @@
 		501D7A1D1D86B18300FA35C4 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		501D7A211D86B18900FA35C4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		5037C1361B72BFA800D1CC6A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		5037C17F1B7C11E800D1CC6A /* ImageManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManagement.swift; sourceTree = "<group>"; };
 		506C2A7F1B6458A700C4347A /* 宿題マスター2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "宿題マスター2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		506C2A831B6458A700C4347A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		506C2A841B6458A700C4347A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -274,7 +272,6 @@
 				50CC6C661D86C55300501CEE /* UserManager.swift */,
 				50BDD4861B6B9DFD0003A9E9 /* TimerModel.swift */,
 				50BDD48A1B6B9E250003A9E9 /* PowerUpModel.swift */,
-				5037C17F1B7C11E800D1CC6A /* ImageManagement.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -306,7 +303,7 @@
 				506C2A7C1B6458A700C4347A /* Frameworks */,
 				506C2A7D1B6458A700C4347A /* Resources */,
 				501D7A201D86B18400FA35C4 /* Embed Frameworks */,
-				501D7A241D86B1AE00FA35C4 /* ShellScript */,
+				501D7A241D86B1AE00FA35C4 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -415,7 +412,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		501D7A241D86B1AE00FA35C4 /* ShellScript */ = {
+		501D7A241D86B1AE00FA35C4 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -424,11 +421,12 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/local/bin/carthage copy-frameworks";
-			shellScript = "";
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -445,7 +443,6 @@
 				50CC6C671D86C55300501CEE /* UserManager.swift in Sources */,
 				506C2AAE1B64850200C4347A /* TitleViewController.swift in Sources */,
 				506C2AB21B6485AA00C4347A /* PowerUpViewController.swift in Sources */,
-				5037C1801B7C11E800D1CC6A /* ImageManagement.swift in Sources */,
 				506C2AB41B6485E100C4347A /* AccountManagementViewController.swift in Sources */,
 				50BDD48B1B6B9E250003A9E9 /* PowerUpModel.swift in Sources */,
 			);

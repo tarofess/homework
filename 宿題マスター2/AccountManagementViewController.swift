@@ -8,12 +8,12 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var defaultAction: UIAlertAction?
+    var okAction: UIAlertAction!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,21 +44,15 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         if(editingStyle == UITableViewCellEditingStyle.Delete){
             let alertController = UIAlertController(title: "アカウントの削除！", message: "このアカウントを削除しちゃう？", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) -> Void in
-                
-                let dbModel = DBModel()
-                dbModel.deleteUser(self.model.getUserID()[indexPath.row])
-                
-                self.model.removeUserID(indexPath.row)
-                self.model.removeUserName(indexPath.row)
-                self.model.removeUserScore(indexPath.row)
-                self.model.removeUserCharacter(indexPath.row)
+                UserManager.sharedManager.deleteUser(UserManager.sharedManager.users[indexPath.row])
+                UserManager.sharedManager.users.removeAtIndex(indexPath.row)
                 
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             })
             let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.Cancel, handler: nil)
-            
             alertController.addAction(ngAction)
             alertController.addAction(okAction)
+            
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
@@ -72,35 +66,36 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     // MARK: - alertController
     
     func showAddNewUserAlert() {
-        let alert:UIAlertController = UIAlertController(title:"登録！",
-            message: "名前を入力してね！",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let cancelAction:UIAlertAction = UIAlertAction(title: "Cancel！",
-            style: UIAlertActionStyle.Cancel, handler:{
-                (action:UIAlertAction!) -> Void in
-        })
-        self.defaultAction = UIAlertAction(title: "OK！",
-            style: UIAlertActionStyle.Default, handler:{ (action:UIAlertAction!) -> Void in
-                let textField = alert.textFields![0] as! UITextField
-                let dbModel = DBModel()
+        let alert:UIAlertController = UIAlertController(title:"登録！", message: "名前を入力してね！", preferredStyle: UIAlertControllerStyle.Alert)
+        okAction = UIAlertAction(title: "これにする！", style: UIAlertActionStyle.Default, handler:{ (action:UIAlertAction!) -> Void in
+            let textField = alert.textFields![0]
+            
+            if textField.text?.characters.count >= 1 {
+                self.okAction.enabled = true
                 
-                if !dbModel.hasSameUserNameInDatabase(textField.text) {
-                    dbModel.insertUser(textField.text)
+                if self.checkHasSameUserNameInDatabase(textField.text!) {
+                    let user = User()
+                    user.name = textField.text!
+                    UserManager.sharedManager.insertUser(user)
+                    UserManager.sharedManager.users.append(user)
                     
-                    self.model.setUserID(dbModel.getAutoIncrementID() - 1)
-                    self.model.setUserName(textField.text)
-                    self.model.setUserScore(0)
-                    self.model.setUserCharacter("あかちゃん")
-                    let indexPath = NSIndexPath(forRow: count(self.model.getUserName()) - 1, inSection: 0)
+                    let indexPath = NSIndexPath(forRow: UserManager.sharedManager.users.count - 1, inSection: 0)
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                 } else {
                     self.showFailureAlert()
                 }
+            } else {
+                self.okAction.enabled = false
+            }
         })
-        defaultAction!.enabled = false
+
+        let cancelAction:UIAlertAction = UIAlertAction(title: "やーめた！",
+            style: UIAlertActionStyle.Cancel, handler:{
+                (action:UIAlertAction!) -> Void in
+        })
+        okAction.enabled = false
         alert.addAction(cancelAction)
-        alert.addAction(defaultAction!)
+        alert.addAction(okAction)
         
         alert.addTextFieldWithConfigurationHandler({(text:UITextField!) -> Void in
             text.placeholder = "名前！"
@@ -122,22 +117,23 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func checkHasSameUserNameInDatabase(name: String!) -> Bool {
+        let realm = try! Realm()
+        let users = realm.objects(User).filter("name = %@", name)
+        
+        if users.count == 0 {
+            return false
+        } else {
+            UserManager.sharedManager.currentUser = users.first!
+            
+            return true
+        }
+    }
+    
     // MARK: - textField
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return false
-    }
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let newLength = count(textField.text!.utf16) + count(string.utf16) - range.length
-        
-        if newLength >= 1 {
-            self.defaultAction!.enabled = true
-        } else {
-            self.defaultAction!.enabled = false
-        }
-        
-        return true
     }
     
     // MARK: - segue

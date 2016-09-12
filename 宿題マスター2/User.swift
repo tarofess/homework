@@ -14,7 +14,7 @@ class User: Object {
     dynamic var id = NSUUID().UUIDString
     dynamic var name = ""
     dynamic var score = 0
-    dynamic var characterName = ""
+    dynamic var characterName = "赤ちゃん"
     
     override class func primaryKey() -> String {
         return "id"
