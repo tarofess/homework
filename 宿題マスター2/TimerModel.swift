@@ -9,6 +9,7 @@
 import Foundation
 
 class TimerModel {
+    
     private var secForTimer = 60
     private var point = 600
     
@@ -46,10 +47,10 @@ class TimerModel {
     }
     
     func getTimeForTimerLabel() -> String {
-        var min = self.getPoint() / 60
-        var minString = min.description
-        var sec = self.getSecForTimer()
-        var secString = sec.description
+        let min = self.getPoint() / 60
+        let minString = min.description
+        let sec = self.getSecForTimer()
+        let secString = sec.description
         
         if min < 10 {
             if sec < 10 {
@@ -61,4 +62,5 @@ class TimerModel {
             return minString + ":" + secString
         }
     }
+    
 }

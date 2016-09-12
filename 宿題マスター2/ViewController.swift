@@ -7,88 +7,61 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var successAuthLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var managementAccountButton: UIBarButtonItem!
-    
-    let model = ViewModel()
-    var txtActiveField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.setNotification()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        self.successAuthLabel.hidden = true
-        self.userNameTextField.text = ""
-        self.userNameTextField.enabled = true
-        self.managementAccountButton.enabled = true
+        self.view.userInteractionEnabled = true
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - notification
-    
-    func setNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        let userInfo =  notification.userInfo!
-        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
-        var txtLimit = txtActiveField.frame.origin.y + txtActiveField.frame.height
-        let kbdLimit = myBoundSize.height - keyboardScreenEndFrame.size.height
+    func authorizeUser() -> Bool {
+        let realm = try! Realm()
+        let users = realm.objects(User).filter("name = %@", userNameTextField.text!)
         
-        if txtLimit >= kbdLimit {
-            self.view.frame.origin.y -= txtLimit - kbdLimit
+        if users.count == 0 {
+            return false
+        } else {
+            UserManager.sharedManager.currentUser = users.first!
+            
+            return true
         }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
     }
     
     // MARK: - textField
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        var isSuccessAuth = model.authUser(textField.text!)
         
-        if isSuccessAuth {
+        if authorizeUser() {
             self.successAuthLabel.hidden = false
             self.managementAccountButton.enabled = false
             self.userNameTextField.enabled = false
-            
-            let userDefault =  NSUserDefaults.standardUserDefaults()
-            userDefault.setObject(model.getUserID(textField.text!), forKey: "userID")
-            userDefault.synchronize()
             
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 self.performSegueWithIdentifier("RunTitleViewController", sender: self)
             }
-        } else {
-            successAuthLabel.hidden = true
+            
+            self.view.userInteractionEnabled = false
         }
         
         return true
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        txtActiveField = textField
-        
-        return true
-    }
 }
 

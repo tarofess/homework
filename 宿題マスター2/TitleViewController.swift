@@ -10,15 +10,32 @@ import Foundation
 import UIKit
 
 class TitleViewController: UIViewController {
+    
     @IBOutlet weak var currentUsersImage: UIImageView!
     @IBOutlet weak var fireImageView: UIImageView!
-    
-    let model = TitleModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var animationSeq = [
+        startFireAnimation()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.showUsersImage()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func tappedBackButton(sender: AnyObject) {
+         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func startFireAnimation() {
+        let animationSeq = [
             UIImage(named: "fire001.png")!,
             UIImage(named: "fire002.png")!,
             UIImage(named: "fire003.png")!,
@@ -41,23 +58,10 @@ class TitleViewController: UIViewController {
         fireImageView.startAnimating()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        
-        self.showUsersImage()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    @IBAction func tappedBackButton(sender: AnyObject) {
-         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     func showUsersImage() {
         let imageManagement = ImageManagement()
         self.currentUsersImage.image = imageManagement.showUsersImageAndName().characterImage
     }
+    
 }
 

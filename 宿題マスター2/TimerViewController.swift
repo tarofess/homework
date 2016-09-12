@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class TimerViewController: UIViewController {
+    
     @IBOutlet weak var completionLabel: UIButton!
     @IBOutlet weak var operateTimerButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
@@ -21,7 +22,6 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,7 +48,7 @@ class TimerViewController: UIViewController {
             self.completionLabel.hidden = true
             self.isTimerStopped = false
             
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateWithTimer", userInfo: nil, repeats: true)
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(TimerViewController.updateWithTimer), userInfo: nil, repeats: true)
         } else {
             self.operateTimerButton.setTitle("スタート！", forState: UIControlState.Normal)
             self.completionLabel.hidden = false
@@ -72,12 +72,10 @@ class TimerViewController: UIViewController {
     // MARK: - segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "RunPowerUpViewController" {
-            let puVC = segue.destinationViewController as! PowerUpViewController
-            puVC.userScore = model.getPoint()
-        }
+        UserManager.sharedManager.currentUser.score = model.getPoint()
     }
     
     @IBAction func unwindToTimerViewController(segue: UIStoryboardSegue) {}
+    
 }
 

@@ -10,14 +10,13 @@ import Foundation
 import UIKit
 
 class AccountManagementViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     
-    let model = AccountManagementModel()
     var defaultAction: UIAlertAction?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,22 +26,18 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     // MARK: - tableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.getUserName().count
+        return UserManager.sharedManager.users.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = model.getUserName()[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        cell.textLabel?.text = UserManager.sharedManager.users[indexPath.row].name
         
         return cell
     }
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        let cell = table.cellForRowAtIndexPath(indexPath)
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        
-        userDefault.setObject(model.getUserID()[indexPath.row], forKey: "userID")
-        performSegueWithIdentifier("RunPowerUpViewController",sender: indexPath)
+        performSegueWithIdentifier("RunPowerUpViewController",sender: UserManager.sharedManager.users[indexPath.row])
     }
     
     func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!){
@@ -134,7 +129,7 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let newLength = count(textField.text.utf16) + count(string.utf16) - range.length
+        let newLength = count(textField.text!.utf16) + count(string.utf16) - range.length
         
         if newLength >= 1 {
             self.defaultAction!.enabled = true
@@ -149,11 +144,10 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let powerUpVC = segue.destinationViewController as! PowerUpViewController
-        let indexPath = sender as! NSIndexPath
-        
-        powerUpVC.userScore = self.model.getUserScore()[indexPath.row]
-        powerUpVC.characterNameStore = self.model.getUserCharacter()[indexPath.row]
+        let user = sender as! User
+        powerUpVC.user = user
         powerUpVC.isWantToShowLabels = true
     }
+    
 }
 

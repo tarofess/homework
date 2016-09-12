@@ -11,6 +11,7 @@ import UIKit
 import AVFoundation
 
 class PowerUpViewController: UIViewController {
+    
     @IBOutlet weak var usersImage: UIImageView!
     @IBOutlet weak var characterName: UILabel!
     @IBOutlet weak var currentPowerLabel: UILabel!
@@ -19,8 +20,7 @@ class PowerUpViewController: UIViewController {
     @IBOutlet weak var clearLabel: UILabel!
     
     let model = PowerUpModel()
-    var userScore = 0
-    var characterNameStore = ""
+    var user: User!
     var isWantToShowLabels = false
     var tapGestureRecognizer: UITapGestureRecognizer!
     var audioPlayer = AVAudioPlayer()
@@ -37,7 +37,7 @@ class PowerUpViewController: UIViewController {
     }
     
     func setTapGestureRecognizer() {
-        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tappedScreen:")
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PowerUpViewController.tappedScreen(_:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -130,7 +130,7 @@ class PowerUpViewController: UIViewController {
     
     func playSound(path: String, type: String) {
         var alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(path, ofType: type)!)
-        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: nil)
         AVAudioSession.sharedInstance().setActive(true, error: nil)
         
         var error: NSError?
@@ -160,5 +160,6 @@ class PowerUpViewController: UIViewController {
         
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
 }
 

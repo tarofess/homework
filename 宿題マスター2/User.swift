@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import RealmSwift
 
-class User: RLMObject {
-    dynamic var id = 0
-    dynamic var userName = ""
+class User: Object {
+    
+    dynamic var id = NSUUID().UUIDString
+    dynamic var name = ""
     dynamic var score = 0
     dynamic var characterName = ""
     
     override class func primaryKey() -> String {
         return "id"
     }
+    
 }

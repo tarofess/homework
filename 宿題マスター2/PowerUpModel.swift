@@ -7,38 +7,36 @@
 //
 
 import Foundation
+import RealmSwift
 
 class PowerUpModel {
     
-    func saveData(aUserID: Int, aScore: Int, aCharacterName: String) {
-        let dbModel = DBModel()
-        dbModel.updateScore(aUserID, aNewScore: aScore, aCharacterName: aCharacterName)
-    }
-    
-    func getUsersCurrentPower() -> Int {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let dbModel = DBModel()
-        
-        return dbModel.getSpecificUsersData(userDefault.objectForKey("userID") as! Int).userScore
+    func saveData(aScore: Int, aCharacterName: String) {
+        let realm = try! Realm()
+        try! realm.write({
+            UserManager.sharedManager.currentUser.score = aScore
+            UserManager.sharedManager.currentUser.characterName = aCharacterName
+        })
     }
     
     func getRestOfPowerForNextLevelUp() -> Int {
-        var currentUserScore = self.getUsersCurrentPower()
+        let userScore = UserManager.sharedManager.currentUser.score
         
-        if currentUserScore <= 200 {
-            return 200 - currentUserScore
-        } else if currentUserScore > 200 && currentUserScore <= 500 {
-            return 500 - currentUserScore
-        } else if currentUserScore > 500 && currentUserScore <= 900 {
-            return 900 - currentUserScore
-        } else if currentUserScore > 900 && currentUserScore <= 1400 {
-            return 1400 - currentUserScore
-        } else if currentUserScore > 1400 && currentUserScore <= 2000 {
-            return 2000 - currentUserScore
-        } else if currentUserScore > 2000 && currentUserScore <= 2700 {
-            return 2700 - currentUserScore
+        if userScore <= 200 {
+            return 200 - userScore
+        } else if userScore > 200 && userScore <= 500 {
+            return 500 - userScore
+        } else if userScore > 500 && userScore <= 900 {
+            return 900 - userScore
+        } else if userScore > 900 && userScore <= 1400 {
+            return 1400 - userScore
+        } else if userScore > 1400 && userScore <= 2000 {
+            return 2000 - userScore
+        } else if userScore > 2000 && userScore <= 2700 {
+            return 2700 - userScore
         } else {
             return 5000
         }
     }
+    
 }
