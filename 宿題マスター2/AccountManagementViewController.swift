@@ -70,22 +70,17 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         okAction = UIAlertAction(title: "これにする！", style: UIAlertActionStyle.Default, handler:{ (action:UIAlertAction!) -> Void in
             let textField = alert.textFields![0]
             
-            if textField.text?.characters.count >= 1 {
-                self.okAction.enabled = true
+            if self.checkHasSameUserNameInDatabase(textField.text!) {
+                let user = User()
+                user.name = textField.text!
+                UserManager.sharedManager.insertUser(user)
+                UserManager.sharedManager.users.append(user)
                 
-                if self.checkHasSameUserNameInDatabase(textField.text!) {
-                    let user = User()
-                    user.name = textField.text!
-                    UserManager.sharedManager.insertUser(user)
-                    UserManager.sharedManager.users.append(user)
-                    
-                    let indexPath = NSIndexPath(forRow: UserManager.sharedManager.users.count - 1, inSection: 0)
-                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                } else {
-                    self.showFailureAlert()
-                }
+                let indexPath = NSIndexPath(forRow: UserManager.sharedManager.users.count - 1, inSection: 0)
+                print(indexPath.row)
+                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             } else {
-                self.okAction.enabled = false
+                self.showFailureAlert()
             }
         })
 
@@ -119,7 +114,8 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     func checkHasSameUserNameInDatabase(name: String!) -> Bool {
         let realm = try! Realm()
-        let users = realm.objects(User).filter("name = %@", name)
+        let predicate = NSPredicate(format: "name = %@", name)
+        let users = realm.objects(User).filter(predicate)
         
         if users.count == 0 {
             return false
@@ -134,6 +130,16 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return false
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if range.location == 0 && string.characters.count == 0 {
+            okAction.enabled = false
+        } else {
+            okAction.enabled = true
+        }
+        
+        return true
     }
     
     // MARK: - segue

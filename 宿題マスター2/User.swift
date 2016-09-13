@@ -12,7 +12,7 @@ import RealmSwift
 class User: Object {
     
     dynamic var id = NSUUID().UUIDString
-    dynamic var name = ""
+    dynamic var name: String!
     dynamic var score = 0
     dynamic var characterName = "赤ちゃん"
     

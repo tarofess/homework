@@ -36,21 +36,21 @@ class TitleViewController: UIViewController {
     
     func startFireAnimation() {
         let animationSeq = [
-            UIImage(named: "fire001.png")!,
-            UIImage(named: "fire002.png")!,
-            UIImage(named: "fire003.png")!,
-            UIImage(named: "fire004.png")!,
-            UIImage(named: "fire005.png")!,
-            UIImage(named: "fire006.png")!,
-            UIImage(named: "fire007.png")!,
-            UIImage(named: "fire008.png")!,
-            UIImage(named: "fire009.png")!,
-            UIImage(named: "fire010.png")!,
-            UIImage(named: "fire011.png")!,
-            UIImage(named: "fire012.png")!,
-            UIImage(named: "fire013.png")!,
-            UIImage(named: "fire014.png")!,
-            UIImage(named: "fire015.png")!
+            UIImage(named: "fire001")!,
+            UIImage(named: "fire002")!,
+            UIImage(named: "fire003")!,
+            UIImage(named: "fire004")!,
+            UIImage(named: "fire005")!,
+            UIImage(named: "fire006")!,
+            UIImage(named: "fire007")!,
+            UIImage(named: "fire008")!,
+            UIImage(named: "fire009")!,
+            UIImage(named: "fire010")!,
+            UIImage(named: "fire011")!,
+            UIImage(named: "fire012")!,
+            UIImage(named: "fire013")!,
+            UIImage(named: "fire014")!,
+            UIImage(named: "fire015")!
         ]
         fireImageView.animationImages = animationSeq
         fireImageView.animationDuration = 1.2
