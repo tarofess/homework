@@ -12,38 +12,38 @@ import RealmSwift
 class UserManager: NSObject {
     
     static let sharedManager = UserManager()
-    var users = Array<User>()
-    var currentUser: User!
+    var users = [User]()
+    var indexPath: IndexPath!
     let realm = try! Realm()
     
-    private override init() {}
+    fileprivate override init() {}
     
     func getUserFromDB() {
-        users = realm.objects(User).map{$0}
+        users = realm.objects(User.self).map{$0}
     }
     
-    func insertUser(user: User) {
+    func insertUser(_ user: User) {
         try! realm.write({
             realm.add(user)
         })
     }
     
-    func updateUser(score: Int, name: String) {
+    func updateUser(_ score: Int, name: String) {
         let realm = try! Realm()
         try! realm.write({
-            UserManager.sharedManager.currentUser.score = score
-            UserManager.sharedManager.currentUser.characterName = name
+            UserManager.sharedManager.users[indexPath.row].score = score
+            UserManager.sharedManager.users[indexPath.row].characterName = name
         })
     }
     
-    func deleteUser(user: User) {
+    func deleteUser(_ user: User) {
         try! realm.write({
             realm.delete(user)
         })
     }
     
     func getCharacterImageAndName() -> (image: UIImage, name: String) {
-        let usersScore = UserManager.sharedManager.currentUser.score
+        let usersScore = UserManager.sharedManager.users[indexPath.row].score
         
         if usersScore <= 200 {
             return (UIImage(named: "baby.png")!, "あかちゃん")

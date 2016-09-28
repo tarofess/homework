@@ -12,7 +12,7 @@ import RealmSwift
 class PowerUpModel {
     
     func getRestOfPowerForNextLevelUp() -> Int {
-        let userScore = UserManager.sharedManager.currentUser.score
+        let userScore = UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row].score
         
         if userScore <= 200 {
             return 200 - userScore

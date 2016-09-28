@@ -17,7 +17,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var pointLabel: UILabel!
     
     let timerModel = TimerModel()
-    var timer: NSTimer!
+    var timer: Timer!
     var isTimerStopped = true
     
     override func viewDidLoad() {
@@ -30,28 +30,28 @@ class TimerViewController: UIViewController {
     
     // MARK: - buttonAction
     
-    @IBAction func tappedCompletionLabel(sender: AnyObject) {
-        let alertController = UIAlertController(title: "どうしよう？", message: "パワーアップさせよう！", preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.Default, handler: {
+    @IBAction func tappedCompletionLabel(_ sender: AnyObject) {
+        let alertController = UIAlertController(title: "どうしよう？", message: "パワーアップさせよう！", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.default, handler: {
             (action: UIAlertAction!) -> Void in
-            self.performSegueWithIdentifier("RunPowerUpViewController", sender: nil)
+            self.performSegue(withIdentifier: "RunPowerUpViewController", sender: nil)
         })
-        let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.Cancel, handler: nil)
+        let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.cancel, handler: nil)
         alertController.addAction(ngAction)
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func operateTimer(sender: AnyObject) {
+    @IBAction func operateTimer(_ sender: AnyObject) {
         if self.isTimerStopped {
-            self.operateTimerButton.setTitle("ストップ！", forState: UIControlState.Normal)
-            self.completionLabel.hidden = true
+            self.operateTimerButton.setTitle("ストップ！", for: UIControlState())
+            self.completionLabel.isHidden = true
             self.isTimerStopped = false
             
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(TimerViewController.updateWithTimer), userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(TimerViewController.updateWithTimer), userInfo: nil, repeats: true)
         } else {
-            self.operateTimerButton.setTitle("スタート！", forState: UIControlState.Normal)
-            self.completionLabel.hidden = false
+            self.operateTimerButton.setTitle("スタート！", for: UIControlState())
+            self.completionLabel.isHidden = false
             self.isTimerStopped = true
             
             self.timer.invalidate()
@@ -63,7 +63,7 @@ class TimerViewController: UIViewController {
     func updateWithTimer() {
         if timerModel.minusTimeAndPoint() {
             self.timer.invalidate()
-            performSegueWithIdentifier("RunGameOverViewController", sender: nil)
+            performSegue(withIdentifier: "RunGameOverViewController", sender: nil)
         }
         self.timerLabel.text = timerModel.getTimeForTimerLabel()
         self.pointLabel.text = "（" + timerModel.point.description + "ポイント）"
@@ -71,11 +71,11 @@ class TimerViewController: UIViewController {
     
     // MARK: - segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        UserManager.sharedManager.currentUser.score = timerModel.point
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row].score = timerModel.point
     }
     
-    @IBAction func unwindToTimerViewController(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToTimerViewController(_ segue: UIStoryboardSegue) {}
     
 }
 

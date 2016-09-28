@@ -25,49 +25,49 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - tableView
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return UserManager.sharedManager.users.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = UserManager.sharedManager.users[indexPath.row].name
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = UserManager.sharedManager.users[(indexPath as NSIndexPath).row].name
         
         return cell
     }
     
-    func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        performSegueWithIdentifier("RunPowerUpViewController",sender: UserManager.sharedManager.users[indexPath.row])
+    func tableView(_ table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
+        performSegue(withIdentifier: "RunPowerUpViewController",sender: UserManager.sharedManager.users[(indexPath as NSIndexPath).row])
     }
     
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!){
-        if(editingStyle == UITableViewCellEditingStyle.Delete){
-            let alertController = UIAlertController(title: "アカウントの削除！", message: "このアカウントを削除しちゃう？", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) -> Void in
+    func tableView(_ tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath!){
+        if(editingStyle == UITableViewCellEditingStyle.delete){
+            let alertController = UIAlertController(title: "アカウントの削除！", message: "このアカウントを削除しちゃう？", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction!) -> Void in
                 UserManager.sharedManager.deleteUser(UserManager.sharedManager.users[indexPath.row])
-                UserManager.sharedManager.users.removeAtIndex(indexPath.row)
+                UserManager.sharedManager.users.remove(at: indexPath.row)
                 
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             })
-            let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.Cancel, handler: nil)
+            let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.cancel, handler: nil)
             alertController.addAction(ngAction)
             alertController.addAction(okAction)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
     // MARK: - IBAction
 
-    @IBAction func addNewUser(sender: AnyObject) {
+    @IBAction func addNewUser(_ sender: AnyObject) {
         self.showAddNewUserAlert()
     }
     
     // MARK: - alertController
     
     func showAddNewUserAlert() {
-        let alert:UIAlertController = UIAlertController(title:"登録！", message: "名前を入力してね！", preferredStyle: UIAlertControllerStyle.Alert)
-        okAction = UIAlertAction(title: "これにする！", style: UIAlertActionStyle.Default, handler:{ (action:UIAlertAction!) -> Void in
+        let alert:UIAlertController = UIAlertController(title:"登録！", message: "名前を入力してね！", preferredStyle: UIAlertControllerStyle.alert)
+        okAction = UIAlertAction(title: "これにする！", style: UIAlertActionStyle.default, handler:{ (action:UIAlertAction!) -> Void in
             let textField = alert.textFields![0]
             
             if self.checkHasSameUserNameInDatabase(textField.text!) {
@@ -76,51 +76,51 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
                 UserManager.sharedManager.insertUser(user)
                 UserManager.sharedManager.users.append(user)
                 
-                let indexPath = NSIndexPath(forRow: UserManager.sharedManager.users.count - 1, inSection: 0)
-                print(indexPath.row)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                let indexPath = IndexPath(row: UserManager.sharedManager.users.count - 1, section: 0)
+                print((indexPath as NSIndexPath).row)
+                self.tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             } else {
                 self.showFailureAlert()
             }
         })
 
         let cancelAction:UIAlertAction = UIAlertAction(title: "やーめた！",
-            style: UIAlertActionStyle.Cancel, handler:{
+            style: UIAlertActionStyle.cancel, handler:{
                 (action:UIAlertAction!) -> Void in
         })
-        okAction.enabled = false
+        okAction.isEnabled = false
         alert.addAction(cancelAction)
         alert.addAction(okAction)
         
-        alert.addTextFieldWithConfigurationHandler({(text:UITextField!) -> Void in
+        alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
             text.placeholder = "名前！"
             text.delegate = self
         })
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func showFailureAlert() {
-        let alertController = UIAlertController(title: "同じ名前が登録されてるよ！", message: "違う名前を入力してね！", preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "わかった!", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+        let alertController = UIAlertController(title: "同じ名前が登録されてるよ！", message: "違う名前を入力してね！", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "わかった!", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) -> Void in
             self.showAddNewUserAlert()
         })
-        let ngAction = UIAlertAction(title: "いやだ！", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction!) -> Void in
+        let ngAction = UIAlertAction(title: "いやだ！", style: UIAlertActionStyle.cancel, handler: { (action: UIAlertAction!) -> Void in
             self.showFailureAlert()
         })
         alertController.addAction(ngAction)
         alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    func checkHasSameUserNameInDatabase(name: String!) -> Bool {
+    func checkHasSameUserNameInDatabase(_ name: String!) -> Bool {
         let realm = try! Realm()
         let predicate = NSPredicate(format: "name = %@", name)
-        let users = realm.objects(User).filter(predicate)
+        let users = realm.objects(User.self).filter(predicate)
         
         if users.count == 0 {
             return false
         } else {
-            UserManager.sharedManager.currentUser = users.first!
+            UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row] = users.first!
             
             return true
         }
@@ -128,15 +128,15 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - textField
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return false
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.location == 0 && string.characters.count == 0 {
-            okAction.enabled = false
+            okAction.isEnabled = false
         } else {
-            okAction.enabled = true
+            okAction.isEnabled = true
         }
         
         return true
@@ -144,8 +144,8 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let powerUpVC = segue.destinationViewController as! PowerUpViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let powerUpVC = segue.destination as! PowerUpViewController
         let user = sender as! User
         powerUpVC.user = user
         powerUpVC.isWantToShowLabels = true

@@ -20,7 +20,7 @@ class TitleViewController: UIViewController {
         startFireAnimation()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         self.showUsersImage()
@@ -30,8 +30,8 @@ class TitleViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func tappedBackButton(sender: AnyObject) {
-         dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func tappedBackButton(_ sender: AnyObject) {
+         dismiss(animated: true, completion: nil)
     }
     
     func startFireAnimation() {

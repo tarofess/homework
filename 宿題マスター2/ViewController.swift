@@ -8,21 +8,25 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var successAuthLabel: UILabel!
     @IBOutlet weak var managementAccountButton: UIBarButtonItem!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setAd()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.view.userInteractionEnabled = true
+        self.view.isUserInteractionEnabled = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,12 +35,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func authorizeUser() -> Bool {
         let realm = try! Realm()
-        let users = realm.objects(User).filter("name = %@", userNameTextField.text!)
+        let users = realm.objects(User.self).filter("name = %@", userNameTextField.text!)
         
         if users.count == 0 {
             return false
         } else {
-            UserManager.sharedManager.currentUser = users.first!
+            UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row] = users.first!
             
             return true
         }
@@ -44,23 +48,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - textField
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         if authorizeUser() {
-            self.successAuthLabel.hidden = false
-            self.managementAccountButton.enabled = false
-            self.userNameTextField.enabled = false
+            self.successAuthLabel.isHidden = false
+            self.managementAccountButton.isEnabled = false
+            self.userNameTextField.isEnabled = false
             
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.performSegueWithIdentifier("RunTitleViewController", sender: self)
+            let delayTime = DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                self.performSegue(withIdentifier: "RunTitleViewController", sender: self)
             }
             
-            self.view.userInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
         }
         
         return true
+    }
+    
+    //Ad
+    
+    func setAd() {
+        bannerView.load(GADRequest())
+        
+        let gadRequest: GADRequest = GADRequest()
+        gadRequest.testDevices = ["35813d541edaeba54769a1516fc90516"]
     }
     
 }

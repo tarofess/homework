@@ -41,18 +41,18 @@ class PowerUpViewController: UIViewController {
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func tappedScreen(sender: UITapGestureRecognizer) {
+    func tappedScreen(_ sender: UITapGestureRecognizer) {
         self.shiningViewAnimation()
         self.view.removeGestureRecognizer(tapGestureRecognizer)
     }
     
     func shiningViewAnimation() {
-        UIView.animateWithDuration(0.4, animations: {
-            self.view.backgroundColor = UIColor.blackColor()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.backgroundColor = UIColor.black
             }, completion: { finished in
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                    self.view.backgroundColor = UIColor.whiteColor()
+                let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                    self.view.backgroundColor = UIColor.white
                     self.isWantToShowLabels = true
                     self.showUpUIAppearance()
                     self.showAfterPowerUpImageAndName()
@@ -79,17 +79,17 @@ class PowerUpViewController: UIViewController {
                 self.nextLevelUpLabel.text = "レベルアップまであと　" + String(powerUpModel.getRestOfPowerForNextLevelUp())
             }
         }
-        self.characterName.hidden = !self.isWantToShowLabels
-        self.currentPowerLabel.hidden = !self.isWantToShowLabels
-        self.nextLevelUpLabel.hidden = !self.isWantToShowLabels
-        self.backButton.hidden = !self.isWantToShowLabels
+        self.characterName.isHidden = !self.isWantToShowLabels
+        self.currentPowerLabel.isHidden = !self.isWantToShowLabels
+        self.nextLevelUpLabel.isHidden = !self.isWantToShowLabels
+        self.backButton.isHidden = !self.isWantToShowLabels
     }
     
     func setPowerValueToLavel() {
         if powerUpModel.getRestOfPowerForNextLevelUp() > 2700 {
-            self.currentPowerLabel.hidden = true
-            self.nextLevelUpLabel.hidden = true
-            self.clearLabel.hidden = false
+            self.currentPowerLabel.isHidden = true
+            self.nextLevelUpLabel.isHidden = true
+            self.clearLabel.isHidden = false
             self.playSound("clear", type: "mp3")
         } else {
             self.currentPowerLabel.text = "今のパワー　" + String(user.score)
@@ -112,12 +112,12 @@ class PowerUpViewController: UIViewController {
         UserManager.sharedManager.updateUser(user.score, name: user.characterName)
     }
     
-    func playSound(path: String, type: String) {
+    func playSound(_ path: String, type: String) {
         do {
-            let alertSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(path, ofType: type)!)
+            let alertSound = URL(fileURLWithPath: Bundle.main.path(forResource: path, ofType: type)!)
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
-            audioPlayer = try AVAudioPlayer(contentsOfURL: alertSound)
+            audioPlayer = try AVAudioPlayer(contentsOf: alertSound)
         } catch {
             print("error")
         }
@@ -125,26 +125,26 @@ class PowerUpViewController: UIViewController {
         audioPlayer.play()
     }
     
-    @IBAction func tappedBackButton(sender: AnyObject) {
+    @IBAction func tappedBackButton(_ sender: AnyObject) {
         self.showBackAlert()
     }
     
     func showBackAlert() {
-        let alertController = UIAlertController(title: "どうしよう？", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let startScreenAction = UIAlertAction(title: "最初の画面に戻る！", style: .Default, handler:{ action in
+        let alertController = UIAlertController(title: "どうしよう？", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let startScreenAction = UIAlertAction(title: "最初の画面に戻る！", style: .default, handler:{ action in
             self.view.removeGestureRecognizer(self.tapGestureRecognizer)
-            self.performSegueWithIdentifier("RunViewController", sender: self)
+            self.performSegue(withIdentifier: "RunViewController", sender: self)
         })
-        let doAgainGameAction = UIAlertAction(title: "もう一回やりたい！", style: .Default, handler:{ action in
+        let doAgainGameAction = UIAlertAction(title: "もう一回やりたい！", style: .default, handler:{ action in
             self.view.removeGestureRecognizer(self.tapGestureRecognizer)
-            self.performSegueWithIdentifier("RunBackTimerViewController", sender: self)
+            self.performSegue(withIdentifier: "RunBackTimerViewController", sender: self)
         })
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         alertController.addAction(startScreenAction)
         alertController.addAction(doAgainGameAction)
         alertController.addAction(cancelAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
 }

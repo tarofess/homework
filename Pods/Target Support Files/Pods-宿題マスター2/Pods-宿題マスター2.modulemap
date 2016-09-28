@@ -1,0 +1,6 @@
+framework module Pods_______2 {
+  umbrella header "Pods-宿題マスター2-umbrella.h"
+
+  export *
+  module * { export * }
+}
