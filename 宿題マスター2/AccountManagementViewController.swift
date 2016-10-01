@@ -9,14 +9,28 @@
 import Foundation
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var okAction: UIAlertAction!
+    @IBOutlet weak var bannerView2: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setAd()
+        
+        let realm = try! Realm()
+        print(realm.objects(User.self))
+        
+//        let realm = try! Realm()
+//        let user = User()
+//        user.name = "テスト"
+//        try! realm.write {
+//            realm.add(user)
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,13 +45,13 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = UserManager.sharedManager.users[(indexPath as NSIndexPath).row].name
+        cell.textLabel?.text = UserManager.sharedManager.users[indexPath.row].name
         
         return cell
     }
     
     func tableView(_ table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
-        performSegue(withIdentifier: "RunPowerUpViewController",sender: UserManager.sharedManager.users[(indexPath as NSIndexPath).row])
+        performSegue(withIdentifier: "RunPowerUpViewController",sender: UserManager.sharedManager.users[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath!){
@@ -114,14 +128,12 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     
     func checkHasSameUserNameInDatabase(_ name: String!) -> Bool {
         let realm = try! Realm()
-        let predicate = NSPredicate(format: "name = %@", name)
+        let predicate = NSPredicate(format: "name = %@", name) 
         let users = realm.objects(User.self).filter(predicate)
         
         if users.count == 0 {
             return false
         } else {
-            UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row] = users.first!
-            
             return true
         }
     }
@@ -149,6 +161,15 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         let user = sender as! User
         powerUpVC.user = user
         powerUpVC.isWantToShowLabels = true
+    }
+    
+    // MARK: - Ad
+    
+    func setAd() {
+        bannerView2.load(GADRequest())
+        
+        let gadRequest: GADRequest = GADRequest()
+        gadRequest.testDevices = ["35813d541edaeba54769a1516fc90516"]
     }
     
 }

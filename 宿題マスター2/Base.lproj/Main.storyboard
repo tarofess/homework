@@ -122,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="356" y="223.53823088455775"/>
         </scene>
-        <!--アカウントの管理-->
+        <!--Root View Controller-->
         <scene sceneID="SbS-bA-8ZV">
             <objects>
                 <viewController storyboardIdentifier="AccountManagementViewController" id="IZp-n8-WnN" customClass="AccountManagementViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,6 +156,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="TOe-rV-VS4"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="adUnitID" value="ca-app-pub-7727323242900759/9927187427"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="rootViewController" destination="IZp-n8-WnN" id="hJj-p9-UZ7"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -177,6 +183,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bannerView2" destination="USx-BA-5is" id="6fK-Dl-pTt"/>
                         <outlet property="tableView" destination="b0E-iT-gxq" id="X6U-5N-QmL"/>
                         <segue destination="s3X-Z3-pHm" kind="presentation" identifier="RunPowerUpViewController" id="cbN-43-joh"/>
                     </connections>
@@ -259,7 +266,7 @@
             </objects>
             <point key="canvasLocation" x="1084" y="224"/>
         </scene>
-        <!--Timer View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="o6W-Jq-6Wb">
             <objects>
                 <viewController storyboardIdentifier="TimerViewController" id="3aR-pd-IKm" customClass="TimerViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
@@ -327,6 +334,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="DoO-AE-YfH"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="adUnitID" value="ca-app-pub-7727323242900759/9927187427"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="rootViewController" destination="3aR-pd-IKm" id="ser-2G-kgu"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -361,6 +374,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bannerView3" destination="mbc-xg-dzg" id="Dig-aZ-9Od"/>
                         <outlet property="completionLabel" destination="w1S-5Z-LtN" id="J0V-6g-o9V"/>
                         <outlet property="operateTimerButton" destination="dbT-NC-SNh" id="jUa-t8-y3W"/>
                         <outlet property="pointLabel" destination="zgf-oc-SK0" id="V2z-Dj-xsM"/>
@@ -413,23 +427,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCr-ds-ndP" customClass="GADBannerView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="GHb-fH-0RC"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="oky-CP-oW7" secondAttribute="leading" id="6QB-x9-iRf"/>
                             <constraint firstItem="X0l-2d-5rW" firstAttribute="centerX" secondItem="rL2-nE-Mw6" secondAttribute="centerX" id="AYz-g3-OVo"/>
-                            <constraint firstItem="jSa-k5-wmY" firstAttribute="top" secondItem="yCr-ds-ndP" secondAttribute="bottom" id="BPb-E3-T50"/>
                             <constraint firstItem="oky-CP-oW7" firstAttribute="top" secondItem="2zb-rc-znu" secondAttribute="bottom" constant="8" id="Fap-xQ-vo2"/>
                             <constraint firstItem="Xuo-BF-Z8O" firstAttribute="top" secondItem="X0l-2d-5rW" secondAttribute="bottom" constant="32" id="N6s-NO-d1g"/>
-                            <constraint firstAttribute="trailing" secondItem="yCr-ds-ndP" secondAttribute="trailing" id="Obq-oI-lra"/>
                             <constraint firstItem="Xuo-BF-Z8O" firstAttribute="leading" secondItem="X0l-2d-5rW" secondAttribute="leading" id="Okr-vD-gwU"/>
-                            <constraint firstItem="yCr-ds-ndP" firstAttribute="leading" secondItem="rL2-nE-Mw6" secondAttribute="leading" id="jWw-Z3-lav"/>
                             <constraint firstItem="X0l-2d-5rW" firstAttribute="centerY" secondItem="rL2-nE-Mw6" secondAttribute="centerY" id="vRe-6i-gLz"/>
                         </constraints>
                     </view>
@@ -550,8 +555,8 @@
         <image name="gameover" width="500" height="700"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JOC-7W-gsC"/>
-        <segue reference="cbN-43-joh"/>
+        <segue reference="qIP-M2-LBw"/>
         <segue reference="Fn6-i4-tuL"/>
+        <segue reference="Bum-Om-TtU"/>
     </inferredMetricsTieBreakers>
 </document>

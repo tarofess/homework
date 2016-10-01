@@ -67,7 +67,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    //Ad
+    // MARK:- Ad
     
     func setAd() {
         bannerView.load(GADRequest())

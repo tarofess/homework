@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMobileAds
 
 class TimerViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var operateTimerButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
+    @IBOutlet weak var bannerView3: GADBannerView!
     
     let timerModel = TimerModel()
     var timer: Timer!
@@ -22,6 +24,8 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setAd()
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,6 +80,15 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func unwindToTimerViewController(_ segue: UIStoryboardSegue) {}
+    
+    // MARK: Ad
+    
+    func setAd() {
+        bannerView3.load(GADRequest())
+        
+        let gadRequest: GADRequest = GADRequest()
+        gadRequest.testDevices = ["35813d541edaeba54769a1516fc90516"]
+    }
     
 }
 
