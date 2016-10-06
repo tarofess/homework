@@ -26,7 +26,6 @@
 		50B3D7EE1D9BFA1C003738D3 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B3D7ED1D9BFA1C003738D3 /* RealmSwift.framework */; };
 		50B3D7F01D9C0195003738D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50B3D7EF1D9C0195003738D3 /* GoogleService-Info.plist */; };
 		50BDD4871B6B9DFD0003A9E9 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BDD4861B6B9DFD0003A9E9 /* TimerModel.swift */; };
-		50BDD48B1B6B9E250003A9E9 /* PowerUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BDD48A1B6B9E250003A9E9 /* PowerUpModel.swift */; };
 		50CC6C671D86C55300501CEE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CC6C661D86C55300501CEE /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,14 +56,14 @@
 		055B1009098D2914A0382A43 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2CEC8DC1DD4BFAC392A8CBBF /* Pods_______2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_______2.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5037C1361B72BFA800D1CC6A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		506C2A7F1B6458A700C4347A /* 宿題マスター2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "宿題マスター2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		506C2A7F1B6458A700C4347A /* homework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		506C2A831B6458A700C4347A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		506C2A841B6458A700C4347A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		506C2A861B6458A700C4347A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		506C2A891B6458A700C4347A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		506C2A8B1B6458A700C4347A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		506C2A8E1B6458A700C4347A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		506C2A941B6458A700C4347A /* 宿題マスター2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "宿題マスター2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		506C2A941B6458A700C4347A /* homeworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homeworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		506C2A991B6458A700C4347A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		506C2A9A1B6458A700C4347A /* ______2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "______2Tests.swift"; sourceTree = "<group>"; };
 		506C2AAD1B64850200C4347A /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +77,6 @@
 		50B3D7ED1D9BFA1C003738D3 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		50B3D7EF1D9C0195003738D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50BDD4861B6B9DFD0003A9E9 /* TimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
-		50BDD48A1B6B9E250003A9E9 /* PowerUpModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUpModel.swift; sourceTree = "<group>"; };
 		50CC6C661D86C55300501CEE /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7B240C8363185DAF02D3C88D /* Pods-宿題マスター2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-宿題マスター2.release.xcconfig"; path = "Pods/Target Support Files/Pods-宿題マスター2/Pods-宿題マスター2.release.xcconfig"; sourceTree = "<group>"; };
 		B2BA7564D7541E6E80394017 /* Pods-宿題マスター2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-宿題マスター2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-宿題マスター2/Pods-宿題マスター2.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,8 +126,8 @@
 		506C2A801B6458A700C4347A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				506C2A7F1B6458A700C4347A /* 宿題マスター2.app */,
-				506C2A941B6458A700C4347A /* 宿題マスター2Tests.xctest */,
+				506C2A7F1B6458A700C4347A /* homework.app */,
+				506C2A941B6458A700C4347A /* homeworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -203,7 +201,6 @@
 				5037C1361B72BFA800D1CC6A /* User.swift */,
 				50CC6C661D86C55300501CEE /* UserManager.swift */,
 				50BDD4861B6B9DFD0003A9E9 /* TimerModel.swift */,
-				50BDD48A1B6B9E250003A9E9 /* PowerUpModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -232,9 +229,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		506C2A7E1B6458A700C4347A /* 宿題マスター2 */ = {
+		506C2A7E1B6458A700C4347A /* homework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 506C2A9E1B6458A700C4347A /* Build configuration list for PBXNativeTarget "宿題マスター2" */;
+			buildConfigurationList = 506C2A9E1B6458A700C4347A /* Build configuration list for PBXNativeTarget "homework" */;
 			buildPhases = (
 				B7E552E8B648A273E7488AE6 /* [CP] Check Pods Manifest.lock */,
 				506C2A7B1B6458A700C4347A /* Sources */,
@@ -249,14 +246,14 @@
 			);
 			dependencies = (
 			);
-			name = "宿題マスター2";
+			name = homework;
 			productName = "宿題マスター2";
-			productReference = 506C2A7F1B6458A700C4347A /* 宿題マスター2.app */;
+			productReference = 506C2A7F1B6458A700C4347A /* homework.app */;
 			productType = "com.apple.product-type.application";
 		};
-		506C2A931B6458A700C4347A /* 宿題マスター2Tests */ = {
+		506C2A931B6458A700C4347A /* homeworkTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 506C2AA11B6458A700C4347A /* Build configuration list for PBXNativeTarget "宿題マスター2Tests" */;
+			buildConfigurationList = 506C2AA11B6458A700C4347A /* Build configuration list for PBXNativeTarget "homeworkTests" */;
 			buildPhases = (
 				506C2A901B6458A700C4347A /* Sources */,
 				506C2A911B6458A700C4347A /* Frameworks */,
@@ -267,9 +264,9 @@
 			dependencies = (
 				506C2A961B6458A700C4347A /* PBXTargetDependency */,
 			);
-			name = "宿題マスター2Tests";
+			name = homeworkTests;
 			productName = "宿題マスター2Tests";
-			productReference = 506C2A941B6458A700C4347A /* 宿題マスター2Tests.xctest */;
+			productReference = 506C2A941B6458A700C4347A /* homeworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -294,7 +291,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 506C2A7A1B6458A700C4347A /* Build configuration list for PBXProject "宿題マスター2" */;
+			buildConfigurationList = 506C2A7A1B6458A700C4347A /* Build configuration list for PBXProject "homework" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -307,8 +304,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				506C2A7E1B6458A700C4347A /* 宿題マスター2 */,
-				506C2A931B6458A700C4347A /* 宿題マスター2Tests */,
+				506C2A7E1B6458A700C4347A /* homework */,
+				506C2A931B6458A700C4347A /* homeworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -413,7 +410,6 @@
 				506C2AAE1B64850200C4347A /* TitleViewController.swift in Sources */,
 				506C2AB21B6485AA00C4347A /* PowerUpViewController.swift in Sources */,
 				506C2AB41B6485E100C4347A /* AccountManagementViewController.swift in Sources */,
-				50BDD48B1B6B9E250003A9E9 /* PowerUpModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +426,7 @@
 /* Begin PBXTargetDependency section */
 		506C2A961B6458A700C4347A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 506C2A7E1B6458A700C4347A /* 宿題マスター2 */;
+			target = 506C2A7E1B6458A700C4347A /* homework */;
 			targetProxy = 506C2A951B6458A700C4347A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -610,7 +606,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/宿題マスター2.app/宿題マスター2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/homework.app/homework";
 			};
 			name = Debug;
 		};
@@ -626,14 +622,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/宿題マスター2.app/宿題マスター2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/homework.app/homework";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		506C2A7A1B6458A700C4347A /* Build configuration list for PBXProject "宿題マスター2" */ = {
+		506C2A7A1B6458A700C4347A /* Build configuration list for PBXProject "homework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				506C2A9C1B6458A700C4347A /* Debug */,
@@ -642,7 +638,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		506C2A9E1B6458A700C4347A /* Build configuration list for PBXNativeTarget "宿題マスター2" */ = {
+		506C2A9E1B6458A700C4347A /* Build configuration list for PBXNativeTarget "homework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				506C2A9F1B6458A700C4347A /* Debug */,
@@ -651,7 +647,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		506C2AA11B6458A700C4347A /* Build configuration list for PBXNativeTarget "宿題マスター2Tests" */ = {
+		506C2AA11B6458A700C4347A /* Build configuration list for PBXNativeTarget "homeworkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				506C2AA21B6458A700C4347A /* Debug */,

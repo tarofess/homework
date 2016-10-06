@@ -9,12 +9,20 @@
 import UIKit
 import RealmSwift
 
+enum ScreenType {
+    case Confirmation
+    case BeforeEvolution
+    case PowerUP
+}
+
 class UserManager: NSObject {
     
     static let sharedManager = UserManager()
     var users = [User]()
-    var indexPath: IndexPath!
     let realm = try! Realm()
+    var currentUser: User!
+    var currentUserScore: Int!
+    var screenType: ScreenType!
     
     fileprivate override init() {}
     
@@ -31,8 +39,8 @@ class UserManager: NSObject {
     func updateUser(_ score: Int, name: String) {
         let realm = try! Realm()
         try! realm.write({
-            UserManager.sharedManager.users[indexPath.row].score = score
-            UserManager.sharedManager.users[indexPath.row].characterName = name
+            currentUser.score = score
+            currentUser.characterName = name
         })
     }
     
@@ -43,7 +51,7 @@ class UserManager: NSObject {
     }
     
     func getCharacterImageAndName() -> (image: UIImage, name: String) {
-        let usersScore = UserManager.sharedManager.users[indexPath.row].score
+        let usersScore = currentUser.score
         
         if usersScore <= 200 {
             return (UIImage(named: "baby.png")!, "あかちゃん")
@@ -59,6 +67,26 @@ class UserManager: NSObject {
             return (UIImage(named: "wiseman.png")!, "かみさま")
         } else {
             return (UIImage(named: "hero")!, "さいきょうのヒーロー")
+        }
+    }
+    
+    func getRestOfPowerForNextLevelUp() -> Int {
+        let userScore = currentUser.score
+        
+        if userScore <= 200 {
+            return 200 - userScore
+        } else if userScore > 200 && userScore <= 500 {
+            return 500 - userScore
+        } else if userScore > 500 && userScore <= 900 {
+            return 900 - userScore
+        } else if userScore > 900 && userScore <= 1400 {
+            return 1400 - userScore
+        } else if userScore > 1400 && userScore <= 2000 {
+            return 2000 - userScore
+        } else if userScore > 2000 && userScore <= 2700 {
+            return 2700 - userScore
+        } else {
+            return 5000
         }
     }
 

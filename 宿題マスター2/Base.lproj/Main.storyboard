@@ -11,7 +11,7 @@
         <!--Root View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="homework" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -25,7 +25,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OK！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peY-d2-Tyh">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OK！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peY-d2-Tyh">
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -104,7 +104,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SDI-dk-qIs">
-                        <barButtonItem key="rightBarButtonItem" title="アカウントの管理" id="tAz-u6-1tc">
+                        <barButtonItem key="rightBarButtonItem" title="アカウント一覧" id="tAz-u6-1tc">
                             <connections>
                                 <segue destination="IZp-n8-WnN" kind="show" id="U5X-G0-rQn"/>
                             </connections>
@@ -125,7 +125,7 @@
         <!--Root View Controller-->
         <scene sceneID="SbS-bA-8ZV">
             <objects>
-                <viewController storyboardIdentifier="AccountManagementViewController" id="IZp-n8-WnN" customClass="AccountManagementViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountManagementViewController" id="IZp-n8-WnN" customClass="AccountManagementViewController" customModule="homework" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9xs-eA-vHx"/>
                         <viewControllerLayoutGuide type="bottom" id="NAM-CD-sHS"/>
@@ -141,7 +141,7 @@
                                         <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LnN-7q-6DT" id="gsS-io-COg">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -195,7 +195,7 @@
         <!--Title View Controller-->
         <scene sceneID="093-Cq-g62">
             <objects>
-                <viewController storyboardIdentifier="TitleViewController" id="NDS-Ck-7Hb" customClass="TitleViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TitleViewController" id="NDS-Ck-7Hb" customClass="TitleViewController" customModule="homework" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mp9-9n-lKJ"/>
                         <viewControllerLayoutGuide type="bottom" id="ZbQ-E9-KAA"/>
@@ -221,7 +221,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="b2t-0A-ItB"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="宿題と戦う！">
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -269,7 +269,7 @@
         <!--Root View Controller-->
         <scene sceneID="o6W-Jq-6Wb">
             <objects>
-                <viewController storyboardIdentifier="TimerViewController" id="3aR-pd-IKm" customClass="TimerViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimerViewController" id="3aR-pd-IKm" customClass="TimerViewController" customModule="homework" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LMR-NK-yVa"/>
                         <viewControllerLayoutGuide type="bottom" id="Stw-So-D1w"/>
@@ -446,7 +446,7 @@
         <!--Power Up View Controller-->
         <scene sceneID="v0q-8a-tmR">
             <objects>
-                <viewController storyboardIdentifier="PowerUpViewController" id="s3X-Z3-pHm" customClass="PowerUpViewController" customModule="宿題マスター2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PowerUpViewController" id="s3X-Z3-pHm" customClass="PowerUpViewController" customModule="homework" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9pD-ej-8vF"/>
                         <viewControllerLayoutGuide type="bottom" id="exh-Re-uOS"/>
@@ -465,6 +465,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq6-LH-nWv">
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="戻る">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -500,17 +501,18 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mCW-zm-Acv" firstAttribute="centerX" secondItem="HG6-q9-A0B" secondAttribute="centerX" id="Avf-Yy-kI0"/>
-                            <constraint firstItem="exh-Re-uOS" firstAttribute="top" secondItem="lYC-g8-paN" secondAttribute="bottom" constant="70" id="BQH-t0-pvB"/>
                             <constraint firstItem="lYC-g8-paN" firstAttribute="centerX" secondItem="HG6-q9-A0B" secondAttribute="centerX" id="GkS-7a-1e3"/>
-                            <constraint firstItem="lYC-g8-paN" firstAttribute="top" secondItem="sN9-wK-A4T" secondAttribute="bottom" constant="8" id="II5-1m-1FT"/>
                             <constraint firstItem="Niy-7h-wWS" firstAttribute="centerX" secondItem="HG6-q9-A0B" secondAttribute="centerX" id="ITi-dx-wIS"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eq6-LH-nWv" secondAttribute="leading" id="IcW-Em-vuK"/>
                             <constraint firstItem="sN9-wK-A4T" firstAttribute="centerY" secondItem="HG6-q9-A0B" secondAttribute="centerY" id="JpC-10-8lX"/>
-                            <constraint firstItem="sN9-wK-A4T" firstAttribute="top" secondItem="Niy-7h-wWS" secondAttribute="bottom" constant="18" id="Ubc-5E-3mO"/>
+                            <constraint firstItem="sN9-wK-A4T" firstAttribute="top" secondItem="Niy-7h-wWS" secondAttribute="bottom" constant="18" id="N87-Bc-v6H"/>
+                            <constraint firstItem="sN9-wK-A4T" firstAttribute="top" secondItem="9pD-ej-8vF" secondAttribute="bottom" constant="94" id="OhP-AY-vcq"/>
+                            <constraint firstItem="exh-Re-uOS" firstAttribute="top" secondItem="sN9-wK-A4T" secondAttribute="bottom" constant="114" id="P0C-p4-xj2"/>
                             <constraint firstItem="exh-Re-uOS" firstAttribute="top" secondItem="qj4-M0-I0w" secondAttribute="bottom" constant="30" id="aIy-Jb-oRu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sN9-wK-A4T" secondAttribute="trailing" constant="28" id="bHm-pN-0pi"/>
                             <constraint firstItem="qj4-M0-I0w" firstAttribute="top" secondItem="mCW-zm-Acv" secondAttribute="bottom" constant="8" id="du8-Ze-d3J"/>
                             <constraint firstItem="qj4-M0-I0w" firstAttribute="centerX" secondItem="HG6-q9-A0B" secondAttribute="centerX" id="iRj-89-eij"/>
+                            <constraint firstItem="lYC-g8-paN" firstAttribute="top" secondItem="sN9-wK-A4T" secondAttribute="bottom" constant="8" id="qt0-Tp-hJV"/>
                             <constraint firstItem="eq6-LH-nWv" firstAttribute="top" secondItem="9pD-ej-8vF" secondAttribute="bottom" constant="8" id="wOc-Ud-VmT"/>
                             <constraint firstItem="sN9-wK-A4T" firstAttribute="centerX" secondItem="HG6-q9-A0B" secondAttribute="centerX" id="yfQ-E5-Y0o"/>
                             <constraint firstItem="sN9-wK-A4T" firstAttribute="leading" secondItem="HG6-q9-A0B" secondAttribute="leadingMargin" constant="28" id="zHD-P7-UG4"/>
@@ -555,8 +557,8 @@
         <image name="gameover" width="500" height="700"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qIP-M2-LBw"/>
-        <segue reference="Fn6-i4-tuL"/>
+        <segue reference="4xr-uN-u2a"/>
         <segue reference="Bum-Om-TtU"/>
+        <segue reference="JOC-7W-gsC"/>
     </inferredMetricsTieBreakers>
 </document>

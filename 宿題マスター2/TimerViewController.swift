@@ -47,18 +47,18 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func operateTimer(_ sender: AnyObject) {
-        if self.isTimerStopped {
-            self.operateTimerButton.setTitle("ストップ！", for: UIControlState())
-            self.completionLabel.isHidden = true
-            self.isTimerStopped = false
+        if isTimerStopped {
+            operateTimerButton.setTitle("ストップ！", for: UIControlState())
+            completionLabel.isHidden = true
+            isTimerStopped = false
             
-            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(TimerViewController.updateWithTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(TimerViewController.updateWithTimer), userInfo: nil, repeats: true)
         } else {
-            self.operateTimerButton.setTitle("スタート！", for: UIControlState())
-            self.completionLabel.isHidden = false
-            self.isTimerStopped = true
+            operateTimerButton.setTitle("スタート！", for: UIControlState())
+            completionLabel.isHidden = false
+            isTimerStopped = true
             
-            self.timer.invalidate()
+            timer.invalidate()
         }
     }
     
@@ -66,17 +66,18 @@ class TimerViewController: UIViewController {
     
     func updateWithTimer() {
         if timerModel.minusTimeAndPoint() {
-            self.timer.invalidate()
+            timer.invalidate()
             performSegue(withIdentifier: "RunGameOverViewController", sender: nil)
         }
-        self.timerLabel.text = timerModel.getTimeForTimerLabel()
-        self.pointLabel.text = "（" + timerModel.point.description + "ポイント）"
+        timerLabel.text = timerModel.getTimeForTimerLabel()
+        pointLabel.text = "（" + timerModel.point.description + "ポイント）"
     }
     
     // MARK: - segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row].score = timerModel.point
+        UserManager.sharedManager.currentUserScore = UserManager.sharedManager.currentUser.score + timerModel.point
+        UserManager.sharedManager.screenType = ScreenType.BeforeEvolution
     }
     
     @IBAction func unwindToTimerViewController(_ segue: UIStoryboardSegue) {}
@@ -85,9 +86,6 @@ class TimerViewController: UIViewController {
     
     func setAd() {
         bannerView3.load(GADRequest())
-        
-        let gadRequest: GADRequest = GADRequest()
-        gadRequest.testDevices = ["35813d541edaeba54769a1516fc90516"]
     }
     
 }

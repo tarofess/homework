@@ -23,10 +23,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         setAd()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
-        self.view.isUserInteractionEnabled = true
+        UIApplication.shared.endIgnoringInteractionEvents()
+        userNameTextField.text = ""
+        successAuthLabel.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,7 +42,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if users.count == 0 {
             return false
         } else {
-            UserManager.sharedManager.users[UserManager.sharedManager.indexPath.row] = users.first!
+            UserManager.sharedManager.currentUser = users.first!
             
             return true
         }
@@ -52,16 +54,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         
         if authorizeUser() {
-            self.successAuthLabel.isHidden = false
-            self.managementAccountButton.isEnabled = false
-            self.userNameTextField.isEnabled = false
+            successAuthLabel.isHidden = false
             
             let delayTime = DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.performSegue(withIdentifier: "RunTitleViewController", sender: self)
             }
             
-            self.view.isUserInteractionEnabled = false
+            UIApplication.shared.beginIgnoringInteractionEvents()
         }
         
         return true
@@ -71,9 +71,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func setAd() {
         bannerView.load(GADRequest())
-        
-        let gadRequest: GADRequest = GADRequest()
-        gadRequest.testDevices = ["35813d541edaeba54769a1516fc90516"]
     }
     
 }

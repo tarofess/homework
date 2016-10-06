@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import RealmSwift
 
 class PowerUpViewController: UIViewController {
     
@@ -19,17 +20,13 @@ class PowerUpViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var clearLabel: UILabel!
     
-    let powerUpModel = PowerUpModel()
-    var user: User!
-    var isWantToShowLabels = false
     var tapGestureRecognizer: UITapGestureRecognizer!
     var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.showUsersImage()
-        self.showUpUIAppearance()
+        showUpUIAppearance()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,79 +34,89 @@ class PowerUpViewController: UIViewController {
     }
     
     func setTapGestureRecognizer() {
-        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PowerUpViewController.tappedScreen(_:)))
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PowerUpViewController.tappedScreen(_:)))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func tappedScreen(_ sender: UITapGestureRecognizer) {
-        self.shiningViewAnimation()
+        shiningViewAnimation()
         self.view.removeGestureRecognizer(tapGestureRecognizer)
     }
     
     func shiningViewAnimation() {
+        UserManager.sharedManager.screenType = ScreenType.PowerUP
+        
         UIView.animate(withDuration: 0.4, animations: {
             self.view.backgroundColor = UIColor.black
             }, completion: { finished in
                 let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: delayTime) {
                     self.view.backgroundColor = UIColor.white
-                    self.isWantToShowLabels = true
                     self.showUpUIAppearance()
-                    self.showAfterPowerUpImageAndName()
-                    self.setPowerValueToLavel()
                 }
         })
     }
     
-    func showUsersImage() {
-        self.usersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
-    }
-    
     func showUpUIAppearance() {
-        if !self.isWantToShowLabels {
-            self.setTapGestureRecognizer()
-        } else {
-            if powerUpModel.getRestOfPowerForNextLevelUp() > 2700 {
-                self.currentPowerLabel.text = ""
-                self.nextLevelUpLabel.text = ""
-                self.characterName.text = user.characterName
-            } else {
-                self.characterName.text = user.characterName
-                self.currentPowerLabel.text = "今のパワー　" + String(user.score)
-                self.nextLevelUpLabel.text = "レベルアップまであと　" + String(powerUpModel.getRestOfPowerForNextLevelUp())
-            }
-        }
-        self.characterName.isHidden = !self.isWantToShowLabels
-        self.currentPowerLabel.isHidden = !self.isWantToShowLabels
-        self.nextLevelUpLabel.isHidden = !self.isWantToShowLabels
-        self.backButton.isHidden = !self.isWantToShowLabels
-    }
-    
-    func setPowerValueToLavel() {
-        if powerUpModel.getRestOfPowerForNextLevelUp() > 2700 {
-            self.currentPowerLabel.isHidden = true
-            self.nextLevelUpLabel.isHidden = true
-            self.clearLabel.isHidden = false
-            self.playSound("clear", type: "mp3")
-        } else {
-            self.currentPowerLabel.text = "今のパワー　" + String(user.score)
-            self.nextLevelUpLabel.text = "レベルアップまであと　" + String(powerUpModel.getRestOfPowerForNextLevelUp())
-
-            let character = user.characterName
-            
-            if user.characterName == character {
-                self.playSound("up", type: "wav")
-            } else {
-                self.playSound("levelup", type: "mp3")
-            }
-        }
-    }
-    
-    func showAfterPowerUpImageAndName() {
-        self.usersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
-        self.characterName.text = UserManager.sharedManager.getCharacterImageAndName().name
+        usersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
         
-        UserManager.sharedManager.updateUser(user.score, name: user.characterName)
+        var hidden: Bool!
+        
+        switch UserManager.sharedManager.screenType! {
+        case .Confirmation:
+            hidden = false
+            setCharacterInfomation()
+        case .BeforeEvolution:
+            hidden = true
+            setTapGestureRecognizer()
+        case .PowerUP:
+            hidden = false
+            saveCharacterInfomation()
+            powerUp()
+            setCharacterInfomation()
+        }
+        
+        characterName.isHidden = hidden
+        currentPowerLabel.isHidden = hidden
+        nextLevelUpLabel.isHidden = hidden
+        backButton.isHidden = hidden
+        
+        if UserManager.sharedManager.getRestOfPowerForNextLevelUp() > 2700 {
+            currentPowerLabel.isHidden = true
+            nextLevelUpLabel.isHidden = true
+        }
+    }
+    
+    func powerUp() {
+        if UserManager.sharedManager.getRestOfPowerForNextLevelUp() > 2700 {
+            clearLabel.isHidden = false
+            characterName.text = UserManager.sharedManager.getCharacterImageAndName().name
+            playSound("clear", type: "mp3")
+        } else {
+            let realm = try! Realm()
+            let predicate = NSPredicate(format: "id = %@", UserManager.sharedManager.currentUser.id)
+            let currentCharacter = realm.objects(User.self).filter(predicate).map{$0}
+            
+            if currentCharacter.first!.characterName == UserManager.sharedManager.getCharacterImageAndName().name {
+                playSound("up", type: "wav")
+            } else {
+                playSound("levelup", type: "mp3")
+            }
+        }
+    }
+    
+    func setCharacterInfomation() {
+        usersImage.image = UserManager.sharedManager.getCharacterImageAndName().image
+        characterName.text = UserManager.sharedManager.getCharacterImageAndName().name
+        
+        if UserManager.sharedManager.getRestOfPowerForNextLevelUp() < 2700 {
+            currentPowerLabel.text = "今のパワー　" + String(UserManager.sharedManager.currentUser.score)
+            nextLevelUpLabel.text = "レベルアップまであと　" + String(UserManager.sharedManager.getRestOfPowerForNextLevelUp())
+        }
+    }
+    
+    func saveCharacterInfomation() {
+        UserManager.sharedManager.updateUser(UserManager.sharedManager.currentUserScore, name: UserManager.sharedManager.getCharacterImageAndName().name)
     }
     
     func playSound(_ path: String, type: String) {
@@ -126,7 +133,14 @@ class PowerUpViewController: UIViewController {
     }
     
     @IBAction func tappedBackButton(_ sender: AnyObject) {
-        self.showBackAlert()
+        switch UserManager.sharedManager.screenType! {
+        case ScreenType.Confirmation:
+            dismiss(animated: true, completion: nil)
+        case ScreenType.PowerUP:
+            showBackAlert()
+        default:
+            break
+        }
     }
     
     func showBackAlert() {

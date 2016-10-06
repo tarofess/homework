@@ -21,16 +21,7 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         setAd()
-        
-        let realm = try! Realm()
-        print(realm.objects(User.self))
-        
-//        let realm = try! Realm()
-//        let user = User()
-//        user.name = "テスト"
-//        try! realm.write {
-//            realm.add(user)
-//        }
+        UserManager.sharedManager.getUserFromDB()
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,19 +42,20 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     }
     
     func tableView(_ table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "RunPowerUpViewController",sender: UserManager.sharedManager.users[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath!){
         if(editingStyle == UITableViewCellEditingStyle.delete){
             let alertController = UIAlertController(title: "アカウントの削除！", message: "このアカウントを削除しちゃう？", preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "はい！", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction!) -> Void in
+            let okAction = UIAlertAction(title: "うん！", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction!) -> Void in
                 UserManager.sharedManager.deleteUser(UserManager.sharedManager.users[indexPath.row])
                 UserManager.sharedManager.users.remove(at: indexPath.row)
                 
                 self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             })
-            let ngAction = UIAlertAction(title: "いいえ！", style: UIAlertActionStyle.cancel, handler: nil)
+            let ngAction = UIAlertAction(title: "やっぱりしない！", style: UIAlertActionStyle.cancel, handler: nil)
             alertController.addAction(ngAction)
             alertController.addAction(okAction)
             
@@ -91,7 +83,6 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
                 UserManager.sharedManager.users.append(user)
                 
                 let indexPath = IndexPath(row: UserManager.sharedManager.users.count - 1, section: 0)
-                print((indexPath as NSIndexPath).row)
                 self.tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             } else {
                 self.showFailureAlert()
@@ -131,7 +122,7 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
         let predicate = NSPredicate(format: "name = %@", name) 
         let users = realm.objects(User.self).filter(predicate)
         
-        if users.count == 0 {
+        if users.count >= 1 {
             return false
         } else {
             return true
@@ -157,19 +148,15 @@ class AccountManagementViewController: UIViewController, UITextFieldDelegate {
     // MARK: - segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let powerUpVC = segue.destination as! PowerUpViewController
         let user = sender as! User
-        powerUpVC.user = user
-        powerUpVC.isWantToShowLabels = true
+        UserManager.sharedManager.currentUser = user
+        UserManager.sharedManager.screenType = ScreenType.Confirmation
     }
     
     // MARK: - Ad
     
     func setAd() {
         bannerView2.load(GADRequest())
-        
-        let gadRequest: GADRequest = GADRequest()
-        gadRequest.testDevices = ["35813d541edaeba54769a1516fc90516"]
     }
     
 }
