@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BDAAFAF3B789C4561814DF4 /* Pods_______2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEC8DC1DD4BFAC392A8CBBF /* Pods_______2.framework */; };
 		5037C1371B72BFA800D1CC6A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037C1361B72BFA800D1CC6A /* User.swift */; };
 		506C2A851B6458A700C4347A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C2A841B6458A700C4347A /* AppDelegate.swift */; };
 		506C2A871B6458A700C4347A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506C2A861B6458A700C4347A /* ViewController.swift */; };
@@ -22,11 +21,23 @@
 		50A295651B7F46D200DBEC8A /* clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 50A295621B7F46D200DBEC8A /* clear.mp3 */; };
 		50A295661B7F46D200DBEC8A /* levelup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 50A295631B7F46D200DBEC8A /* levelup.mp3 */; };
 		50A295671B7F46D200DBEC8A /* up.wav in Resources */ = {isa = PBXBuildFile; fileRef = 50A295641B7F46D200DBEC8A /* up.wav */; };
-		50B3D7EC1D9BFA19003738D3 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B3D7EB1D9BFA19003738D3 /* Realm.framework */; };
-		50B3D7EE1D9BFA1C003738D3 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B3D7ED1D9BFA1C003738D3 /* RealmSwift.framework */; };
 		50B3D7F01D9C0195003738D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50B3D7EF1D9C0195003738D3 /* GoogleService-Info.plist */; };
 		50BDD4871B6B9DFD0003A9E9 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BDD4861B6B9DFD0003A9E9 /* TimerModel.swift */; };
 		50CC6C671D86C55300501CEE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CC6C661D86C55300501CEE /* UserManager.swift */; };
+		EA7EE2A91FA2F44A008AD9F4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2A81FA2F445008AD9F4 /* AdSupport.framework */; };
+		EA7EE2AB1FA2F453008AD9F4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2AA1FA2F450008AD9F4 /* AudioToolbox.framework */; };
+		EA7EE2AD1FA2F45C008AD9F4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2AC1FA2F459008AD9F4 /* AVFoundation.framework */; };
+		EA7EE2AF1FA2F465008AD9F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2AE1FA2F462008AD9F4 /* CoreGraphics.framework */; };
+		EA7EE2B11FA2F46F008AD9F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2B01FA2F46B008AD9F4 /* CoreMedia.framework */; };
+		EA7EE2B31FA2F478008AD9F4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2B21FA2F475008AD9F4 /* CoreTelephony.framework */; };
+		EA7EE2B51FA2F49D008AD9F4 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2B41FA2F49A008AD9F4 /* EventKit.framework */; };
+		EA7EE2B71FA2F4A5008AD9F4 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2B61FA2F4A2008AD9F4 /* EventKitUI.framework */; };
+		EA7EE2B91FA2F4AD008AD9F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2B81FA2F4AB008AD9F4 /* MessageUI.framework */; };
+		EA7EE2BB1FA2F4B7008AD9F4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2BA1FA2F4B3008AD9F4 /* StoreKit.framework */; };
+		EA7EE2BD1FA2F4BF008AD9F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2BC1FA2F4BD008AD9F4 /* SystemConfiguration.framework */; };
+		EA7EE2C11FA2F508008AD9F4 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2C01FA2F508008AD9F4 /* GoogleMobileAds.framework */; };
+		EA7EE2C51FA2FCA1008AD9F4 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2C31FA2FCA1008AD9F4 /* Realm.framework */; };
+		EA7EE2C61FA2FCA1008AD9F4 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7EE2C41FA2FCA1008AD9F4 /* RealmSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +64,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		055B1009098D2914A0382A43 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		2CEC8DC1DD4BFAC392A8CBBF /* Pods_______2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_______2.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5037C1361B72BFA800D1CC6A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		506C2A7F1B6458A700C4347A /* homework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		506C2A831B6458A700C4347A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,14 +82,23 @@
 		50A295621B7F46D200DBEC8A /* clear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clear.mp3; sourceTree = "<group>"; };
 		50A295631B7F46D200DBEC8A /* levelup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelup.mp3; sourceTree = "<group>"; };
 		50A295641B7F46D200DBEC8A /* up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = up.wav; sourceTree = "<group>"; };
-		50B3D7EB1D9BFA19003738D3 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
-		50B3D7ED1D9BFA1C003738D3 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		50B3D7EF1D9C0195003738D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50BDD4861B6B9DFD0003A9E9 /* TimerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		50CC6C661D86C55300501CEE /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		7B240C8363185DAF02D3C88D /* Pods-宿題マスター2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-宿題マスター2.release.xcconfig"; path = "Pods/Target Support Files/Pods-宿題マスター2/Pods-宿題マスター2.release.xcconfig"; sourceTree = "<group>"; };
-		B2BA7564D7541E6E80394017 /* Pods-宿題マスター2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-宿題マスター2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-宿題マスター2/Pods-宿題マスター2.debug.xcconfig"; sourceTree = "<group>"; };
-		F24C2D63E0B72B7DB5A657AE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EA7EE2A81FA2F445008AD9F4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		EA7EE2AA1FA2F450008AD9F4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		EA7EE2AC1FA2F459008AD9F4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EA7EE2AE1FA2F462008AD9F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EA7EE2B01FA2F46B008AD9F4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		EA7EE2B21FA2F475008AD9F4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		EA7EE2B41FA2F49A008AD9F4 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		EA7EE2B61FA2F4A2008AD9F4 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		EA7EE2B81FA2F4AB008AD9F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		EA7EE2BA1FA2F4B3008AD9F4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EA7EE2BC1FA2F4BD008AD9F4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EA7EE2C01FA2F508008AD9F4 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		EA7EE2C31FA2FCA1008AD9F4 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		EA7EE2C41FA2FCA1008AD9F4 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,9 +106,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50B3D7EE1D9BFA1C003738D3 /* RealmSwift.framework in Frameworks */,
-				50B3D7EC1D9BFA19003738D3 /* Realm.framework in Frameworks */,
-				2BDAAFAF3B789C4561814DF4 /* Pods_______2.framework in Frameworks */,
+				EA7EE2C51FA2FCA1008AD9F4 /* Realm.framework in Frameworks */,
+				EA7EE2C61FA2FCA1008AD9F4 /* RealmSwift.framework in Frameworks */,
+				EA7EE2BD1FA2F4BF008AD9F4 /* SystemConfiguration.framework in Frameworks */,
+				EA7EE2BB1FA2F4B7008AD9F4 /* StoreKit.framework in Frameworks */,
+				EA7EE2B91FA2F4AD008AD9F4 /* MessageUI.framework in Frameworks */,
+				EA7EE2B71FA2F4A5008AD9F4 /* EventKitUI.framework in Frameworks */,
+				EA7EE2B51FA2F49D008AD9F4 /* EventKit.framework in Frameworks */,
+				EA7EE2B31FA2F478008AD9F4 /* CoreTelephony.framework in Frameworks */,
+				EA7EE2C11FA2F508008AD9F4 /* GoogleMobileAds.framework in Frameworks */,
+				EA7EE2B11FA2F46F008AD9F4 /* CoreMedia.framework in Frameworks */,
+				EA7EE2AF1FA2F465008AD9F4 /* CoreGraphics.framework in Frameworks */,
+				EA7EE2AD1FA2F45C008AD9F4 /* AVFoundation.framework in Frameworks */,
+				EA7EE2AB1FA2F453008AD9F4 /* AudioToolbox.framework in Frameworks */,
+				EA7EE2A91FA2F44A008AD9F4 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +147,6 @@
 				506C2A811B6458A700C4347A /* 宿題マスター2 */,
 				506C2A971B6458A700C4347A /* 宿題マスター2Tests */,
 				506C2A801B6458A700C4347A /* Products */,
-				D231BC37AF5B50CFBA3A6DC1 /* Pods */,
 				FD2B4181719DA676B98479F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -205,23 +233,23 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		D231BC37AF5B50CFBA3A6DC1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				055B1009098D2914A0382A43 /* Pods.debug.xcconfig */,
-				F24C2D63E0B72B7DB5A657AE /* Pods.release.xcconfig */,
-				B2BA7564D7541E6E80394017 /* Pods-宿題マスター2.debug.xcconfig */,
-				7B240C8363185DAF02D3C88D /* Pods-宿題マスター2.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		FD2B4181719DA676B98479F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				50B3D7ED1D9BFA1C003738D3 /* RealmSwift.framework */,
-				50B3D7EB1D9BFA19003738D3 /* Realm.framework */,
-				2CEC8DC1DD4BFAC392A8CBBF /* Pods_______2.framework */,
+				EA7EE2C31FA2FCA1008AD9F4 /* Realm.framework */,
+				EA7EE2C41FA2FCA1008AD9F4 /* RealmSwift.framework */,
+				EA7EE2C01FA2F508008AD9F4 /* GoogleMobileAds.framework */,
+				EA7EE2BC1FA2F4BD008AD9F4 /* SystemConfiguration.framework */,
+				EA7EE2BA1FA2F4B3008AD9F4 /* StoreKit.framework */,
+				EA7EE2B81FA2F4AB008AD9F4 /* MessageUI.framework */,
+				EA7EE2B61FA2F4A2008AD9F4 /* EventKitUI.framework */,
+				EA7EE2B41FA2F49A008AD9F4 /* EventKit.framework */,
+				EA7EE2B21FA2F475008AD9F4 /* CoreTelephony.framework */,
+				EA7EE2B01FA2F46B008AD9F4 /* CoreMedia.framework */,
+				EA7EE2AE1FA2F462008AD9F4 /* CoreGraphics.framework */,
+				EA7EE2AC1FA2F459008AD9F4 /* AVFoundation.framework */,
+				EA7EE2AA1FA2F450008AD9F4 /* AudioToolbox.framework */,
+				EA7EE2A81FA2F445008AD9F4 /* AdSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,14 +261,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 506C2A9E1B6458A700C4347A /* Build configuration list for PBXNativeTarget "homework" */;
 			buildPhases = (
-				B7E552E8B648A273E7488AE6 /* [CP] Check Pods Manifest.lock */,
 				506C2A7B1B6458A700C4347A /* Sources */,
 				506C2A7C1B6458A700C4347A /* Frameworks */,
 				506C2A7D1B6458A700C4347A /* Resources */,
 				501D7A201D86B18400FA35C4 /* Embed Frameworks */,
 				501D7A241D86B1AE00FA35C4 /* Run Script */,
-				BE044DF9E39A050895DB176F /* [CP] Embed Pods Frameworks */,
-				4C798E709BD256A4B375EB0B /* [CP] Copy Pods Resources */,
+				EA7EE2C71FA2FCAD008AD9F4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -335,21 +361,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4C798E709BD256A4B375EB0B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-宿題マスター2/Pods-宿題マスター2-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		501D7A241D86B1AE00FA35C4 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,35 +375,20 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
-		B7E552E8B648A273E7488AE6 /* [CP] Check Pods Manifest.lock */ = {
+		EA7EE2C71FA2FCAD008AD9F4 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BE044DF9E39A050895DB176F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-宿題マスター2/Pods-宿題マスター2-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -537,7 +533,6 @@
 		};
 		506C2A9F1B6458A700C4347A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2BA7564D7541E6E80394017 /* Pods-宿題マスター2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -547,6 +542,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/RealmSwift",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "宿題マスター2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -565,7 +561,6 @@
 		};
 		506C2AA01B6458A700C4347A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B240C8363185DAF02D3C88D /* Pods-宿題マスター2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -575,6 +570,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/RealmSwift",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "宿題マスター2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
